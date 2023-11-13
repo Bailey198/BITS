@@ -1,4 +1,4 @@
-COSC2430-Full-stack-Web-Application
+Full-stack-Web-Application
 
 GitHub Repository: https://github.com/NMTNhan/WebProgramming.git
 
