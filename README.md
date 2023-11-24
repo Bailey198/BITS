@@ -1,8 +1,6 @@
-Full-stack-Web-Application
+Web-Application
+BITS
 
-GitHub Repository: https://github.com/NMTNhan/WebProgramming.git
-
-Video demonstration URL: 
 
 Existing accounts to test:
 
