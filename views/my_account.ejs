@@ -1,0 +1,62 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("partials/head", {title: "My account"}) %>
+    <Script defer src="/js/fileUpload.js"></Script>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    <main class="flex justify-center align-middle m-1 p-1">
+        <div class="w-full md:w-4/5">
+            <div class="m-1 p-1 mt-5 flex flex-row justify-center ">
+                <h1 class="font-extrabold text-4xl font-sans">
+                    My account
+                </h1>
+            </div>
+            <div class="flex justify-center m-2 p-4 ">
+                <div class="flex flex-col md:flex-row w-full justify-center mx-10 px-4 rounded-xl shadow-xl bg-lime">
+                    <!-- Left part -->
+                    <div class="w-full md:w-3/5 m-2 p-2">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-800 font-bold">Full Name:</label>
+                            <input type="text" id="name" class="w-full border border-gray-300 rounded p-2" value="<%- user.name || user.businessName || "Nguyen Van A" %>" readonly>
+                        </div>
+                        <div class="mb-4">
+                            <label for="username" class="block text-gray-800 font-bold">Username:</label>
+                            <input type="text" id="username" class="w-full border border-gray-300 rounded p-2" value="<%- user.username || "nguyenvana123" %>" readonly>
+                        </div>
+                        <div class="mb-4">
+                            <label for="address" class="block text-gray-800 font-bold">Address:</label>
+                            <input type="text" id="address" class="w-full border border-gray-300 rounded p-2" value="<%- user.address|| user.businessAddress ||  "The White House" %>" readonly>
+                        </div>
+                        <div class="mb-4">
+                            <label for="tel" class="block text-gray-800 font-bold">Phone number:</label>
+                            <input type="tel" id="tel" class="w-full border border-gray-300 rounded p-2" value="<%- user.phoneNumber || "0123456789" %>" readonly>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-800 font-bold">Email:</label>
+                            <input type="email" id="email" class="w-full border border-gray-300 rounded p-2" value="<%- user.email || "nguyenvana@gmail.com" %>" readonly>
+                        </div>
+                    </div>
+                    <!-- Right part -->
+                    <%- include('partials/update_avatar.ejs') %>   
+                </div>
+                
+            </div>
+            <div class="flex flex-row justify-center">
+                <button onclick="window.location.href='/auth/logout'" class="m-3 py-2 px-6 bg-green-300 text-white shadow-md rounded-2xl hover:opacity-80">Log out</button>
+            </div>
+        </div>
+    </main>
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>

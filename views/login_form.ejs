@@ -1,0 +1,52 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.16/dist/tailwind.min.css">
+</head>
+<body class="flex items-center justify-center h-screen bg-cover bg-center bg-gradient-to-r from-green-400 via-green-100 to-blue-400">
+  <div class="bg-white p-10 w-11/12 md:w-5/12 rounded-2xl shadow-2xl">
+    <!-- Logo -->
+    <img src="\images\Logo.png" class="mx-auto w-10" alt="Buy fit logo" >
+    <h1 class="text-center text-2xl font-bold mb-5">Buy Fit</h1>
+    <%- include ('./partials/error') %>
+
+    <!-- Login form -->
+    <form action="/auth/login" method="post">
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2" for="username">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline" viewBox="0 0 24 24"><path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path></svg>
+          Username
+        </label>
+        <input class="border rounded-lg px-3 py-1 w-full" type="text" name="username" id="username" value="<%= typeof username != 'undefined' ? username : ''%>">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2" for="password">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline" viewBox="0 0 24 24"><path d="M18 8H20C20.5523 8 21 8.44772 21 9V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V9C3 8.44772 3.44772 8 4 8H6V7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7V8ZM5 10V20H19V10H5ZM11 14H13V16H11V14ZM7 14H9V16H7V14ZM15 14H17V16H15V14ZM16 8V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V8H16Z"></path></svg>
+          Password
+        </label>
+        <input class="border rounded-lg px-3 py-1 w-full" type="password" name="password" id="password" value="<%= typeof password != 'undefined' ? password : ''%>">
+      </div>
+      <div class="mb-4">
+        <p class="inline text-gray-700 mb-2">Don't have an account?</p>
+        <a href="/auth" class="underline font-bold">Sign up here</a>
+      </div>
+      <button class="bg-green-600 hover:bg-green-500 text-white cursor-pointer w-full py-2 px-4 rounded-md text-center block text-base mx-auto my-4 transition duration-300 ease-in-out" type="submit">
+        Sign In
+      </button>
+    </form>
+  </div>
+</body>
+</html>

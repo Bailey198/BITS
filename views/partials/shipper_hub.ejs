@@ -1,0 +1,52 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+
+<section class="m-2 p-1 flex flex-col">
+    <div class="flex md:flex-row justify-center m-1 p-1 sm:flex-col">
+        <div class="m-2 p-1 md:w-3/5 shadow-lg sm:w-full">
+            <img class="bg-gradient-to-b" src="<%- locals.distributionHubImage || '/images/distribution-hub-1.jpg' %>" alt="">
+        </div>
+        <div class="m-2 p-1 md:w-2/5 flex flex-col justify-start border-gray-300 border rounded-md sm:w-full">
+            <div class="font-serif font-bold">
+                <h1 class="text-3xl">
+                    Distribution hub: <%- user.distributionHub || "Unknown" %>
+                </h1>
+            </div>
+            <div class="flex flex-col">
+                <p class="italic font-sans">
+                    Address: <%- locals.distributionHubLocation || "Unknown" %>
+                </p>
+                <br>
+                <p>
+                    Established in 2023, located in the central district, this distribution hub is one of 
+                    the busiest destination of the city. The first distribution hub of our company in Vietnam. 
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col m-1 p-1">
+        <div class="m-1 p-1 flex flex-row justify-center">
+            <h1 class="font-sans font-bold text-3xl italic">
+                Active orders
+            </h1>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6 border-2 border-blue-500">
+            <div class="grid grid-cols-3 gap-4">
+                <div class="col-span-2">
+                    <h2 class="text-xl font-bold">Order #1234</h2>
+                    <p class="text-gray-600">Placed on May 10, 2023</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <p class="text-xl font-bold">$99.99</p>
+                <p class="text-green-600">Shipped</p>
+            </div>
+        </div>        
+    </div>
+</section>

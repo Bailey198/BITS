@@ -1,0 +1,58 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("partials/head", {title: "About Us"}) %>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    <main>
+        <!-- Group picture :( -->
+        <div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
+            <div class="flex flex-col lg:flex-row justify-between gap-8">
+                <div class="w-full lg:w-5/12 flex flex-col justify-center">
+                    <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">About Us</h1>
+                    <p class="font-normal text-base leading-6 text-gray-600 dark:text-white">We are Group 1 from the Web Programming course. Our team consists of 3 members. With Thai and Khiem behind the back end and Nhan on the Front End</p>
+                </div>
+                <div class="w-full lg:w-8/12">
+                    <img class="w-full h-full" src="\images\webprogramming.png" alt="Send help" />
+                </div>
+            </div>
+    
+            <div class="flex lg:flex-row flex-col justify-between gap-8 pt-12">
+                <div class="w-full lg:w-5/12 flex flex-col justify-center">
+                    <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">Our Story</h1>
+                    <p class="font-normal text-base leading-6 text-gray-600 dark:text-white">Our mission was to provide the user's with the best experience when shopping online, and our website BuyFit will provide it. PS: The wide Nhan is reallllll</p>
+                </div>
+                <div class="w-full lg:w-8/12 lg:pt-8">
+                    <!-- Individual Avatar -->
+                    <div class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
+                        <div class="p-4 pb-6 flex justify-center flex-col items-center">
+                            <img class="md:block hidden h-48 w-48" src="\images\Thai.jpg" alt="Thai" />
+                            <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Quoc Thai</p>
+                        </div>
+                        <div class="p-4 pb-6 flex justify-center flex-col items-center">
+                            <img class="md:block hidden h-48 w-48" src="\images\TNhan.jpg" alt="Nhan" />
+                            <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Trong Nhan</p>
+                        </div>
+                        <div class="p-4 pb-6 flex justify-center flex-col items-center">
+                            <img class="md:block hidden" src="https://i.ibb.co/Pc6XVVC/Rectangle-120.png" alt="Khiem" />
+                            <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Khiem</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </main>
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>

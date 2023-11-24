@@ -1,0 +1,26 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+
+
+<section class="flex flex-col justify-center p-2 m-2 rounded  mt-10">
+        <!-- Text above the products -->
+    <div class="flex flex-row justify-center mt-2 mx-1 mb-5">
+        <h1 class="font-sans font-bold sm:text-3xl lg:text-3xl md:text-3xl italic my-3">
+            Just released
+        </h1>
+    </div>
+                    <!-- Product cards -->
+    <div class="flex flex-row justify-around flex-wrap min-w-[240px] [&>div]:w-[90%] sm:[&>div]:w-2/5  md:[&>div]:w-1/5">
+        <% if (locals.products != null) { %>
+            <% products.forEach(product => { %>
+                <%- include('productCard', {product}) %>
+            <% }); %>
+        <% } %>
+    </div>
+</section>

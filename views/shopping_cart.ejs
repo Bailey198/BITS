@@ -1,0 +1,189 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("partials/head", {title: "Shopping cart" }) %>
+</head>
+
+<body>
+    <%- include('partials/header.ejs') %>
+        <div class="container mx-auto mt-5">
+            <form action="/users/customer/checkout" method="post">
+                <div class="flex flex-col shadow-2xl my-10 md:flex-row">
+                    <div class="w-full bg-white px-2 md:px-10 py-10 md:w-3/4">
+                        <div class="flex justify-between border-b pb-8">
+                            <h1 class="font-semibold text-2xl">Shopping Cart</h1>
+                            <h2 class="font-semibold text-2xl">
+                                <%= cartItems.length %> Items
+                            </h2>
+                        </div>
+                        <div class="flex mt-10 mb-5">
+                            <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
+                            <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
+                                Quantity
+                            </h3>
+                            <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
+                                Price
+                            </h3>
+                            <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
+                                Total
+                            </h3>
+                        </div>
+
+                        <% if (cartItems.length===0) { %>
+                            <p>Buying successfully!.</p>
+                        <% } else { %>
+                            <% var total=0 %>
+                            <% var count = 1 %>
+                            <% cartItems.forEach((item)=> { %>
+                                <div class="flex items-center hover:bg-gray-100 -mx-8 px-8 py-5">
+                                    <div class="flex flex-col md:flex-row w-2/5">
+                                        <div class="w-24 aspect-square overflow-hidden rounded-2xl">
+                                            <img class="w-h-full object-cover"
+                                                src="<%= item[1].imageCoverData %>"
+                                                alt="Product cover image">
+                                        </div>
+                                        <div class="flex flex-col justify-between mt-4 md:ml-4 flex-grow">
+                                            <span class="font-bold text-sm">
+                                                <%= item[1].name %>
+                                            </span>
+                                            <a href="/users/customer/<%= item[1].id %>/remove"
+                                                class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+                                        </div>
+                                    </div>
+                                    <!-- Quantity -->
+                                    <div class="center-xy w-1/5 ml-auto">
+                                        <div class="center-x rounded-md border-solid-1 border-gray-300">
+                                            <!-- Decrease value -->
+                                            <button id="quantityDecrease-<%= count %>" class="no-submit px-2 py-2"><svg class="w-4"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path d="M8 12L14 6V18L8 12Z"></path>
+                                                </svg></button>
+                                            <!-- Value -->
+                                            <div id="quantityValue-<%= count %>" 
+                                                class="px-2 py-2 focus:outline-none">
+                                                <%= item[0] %>
+                                            </div>
+                                            <!-- Increase value -->
+                                            <button id="quantityIncrease-<%= count %>" class="no-submit px-2 py-2"><svg class="w-4"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path d="M16 12L10 18V6L16 12Z"></path>
+                                                </svg></button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Price -->
+                                    <span id="itemPrice-<%= count %>" data-item-price="<%= item[1].price %>" class="text-center float-right w-1/5 font-semibold text-sm">$<%= item[1].price %></span>
+
+                                    <!-- Total -->
+                                    <span id="totalItemPrice-<%= count %>" class="text-center float-right w-1/5 font-semibold text-sm">$<%= item[1].price * item[0] %></span>
+                                    <% //total=(item[1].price * item[0]) + total %>
+                                </div>
+
+                                <input id="productQuantity-<%= count %>" type="hidden" name="productQuantity" value="<%= item[0] %>">
+                                <input id="productId-<%= count %>" type="hidden" name="productId" value="<%= item[1]._id %>">
+
+                                <% count += 1 %>
+                                <% }) %>
+                        <% } %>
+
+                        <a href="/users/customer"
+                            class="inline-flex font-semibold text-green-800 text-sm mt-10">
+
+                            <svg class="fill-current mr-2 text-green-800 w-4"
+                                viewBox="0 0 448 512">
+                                <path
+                                    d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" ></path>
+                            </svg>
+                            Continue Shopping
+                        </a>
+                    </div>
+
+                    <div id="summary" class="w-full px-2 md:px-10 py-10 md:w-1/4">
+                        <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
+                        <div class="flex justify-between mt-10 mb-5">
+                            <span class="font-semibold text-sm uppercase">Items: <%= cartItems.length %></span>
+                            <span id="totalPrice" class="font-semibold text-sm">$<%= total || 0 %></span>
+                        </div>
+                        <div>
+                            <label class="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
+                            <span class="block p-2 text-gray-600 w-full text-sm">
+                                Standard shipping <span class="float-right">$10.00</span>
+                            </span>
+                        </div>
+
+                        <!-- Checkout  -->
+                        <div class="border-t mt-8">
+                            <div class="flex font-semibold justify-between py-6 text-sm uppercase">
+                                <span>Total cost</span>
+                                <span id="totalCost">$<%= (total + 10) || 0%> </span>
+                            </div>
+                            <button type="submit"
+                                class="bg-lime-500 rounded-md font-semibold hover:bg-lime-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <%- include('partials/footer.ejs') %>
+        <script>
+            const cartLength = '<%= cartItems.length %>'
+            const noSubmitBtn = $('.no-submit')
+        
+            noSubmitBtn.each(function () {
+                $(this).on('click', e => {
+                    e.preventDefault()
+                })
+            })
+        
+            for (let id = 1; id <= cartLength; id++) {
+                $(`#quantityDecrease-${id}`).on("click", function () {
+                    let currentQuantity = parseInt($(`#quantityValue-${id}`).text())
+                    if (currentQuantity <= 1) return
+        
+                    const quantityAfter = currentQuantity - 1
+                    const itemPrice = parseInt($(`#itemPrice-${id}`).data('item-price'))
+                    quantityUpdate(id, quantityAfter, itemPrice)
+                    updateTotal()
+                })
+        
+                $(`#quantityIncrease-${id}`).on("click", function () {
+                    let currentQuantity = parseInt($(`#quantityValue-${id}`).text())
+                    if (currentQuantity >= 999) return
+        
+                    const quantityAfter = currentQuantity + 1
+                    const itemPrice = parseInt($(`#itemPrice-${id}`).data('item-price'))
+                    quantityUpdate(id, quantityAfter, itemPrice)
+                    updateTotal()
+                })
+        
+            }
+        
+            function quantityUpdate(id, quantityAfter, itemPrice) {
+                $(`#quantityValue-${id}`).text(quantityAfter)
+                $(`#totalItemPrice-${id}`).text('$' + quantityAfter * itemPrice)
+                $(`#productQuantity-${id}`).val(quantityAfter)
+            }
+        
+            function updateTotal() {
+                let totalPrices = 0;
+                for (let id = 1; id <= cartLength; id++) {
+                    totalPrices += parseInt($(`#totalItemPrice-${id}`).text().slice(1))
+                }
+                $('#totalPrice').text('$' + totalPrices)
+                $('#totalCost').text('$' + ((totalPrices + 10) * discount))
+            }
+        
+            updateTotal()
+        
+        </script>
+</body>
+</html>

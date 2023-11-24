@@ -1,0 +1,67 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+
+
+<header class='border-b py-4 px-4 sm:px-10 bg-green font-sans min-h-[70px] items-center'>
+  <div class='flex flex-wrap justify-between items-center'>
+    <!-- Logo -->
+      <div class="flex gap-2 cursor-pointer"
+         onclick="location.href='/'">
+        <img class="w-20 h-20" src="/images/Logo.png" alt="Buy Fit logo">
+        </div>
+    
+
+    <button class='lg:hidden ml-auto'>
+      <svg class="w-7 h-7" fill="#000" viewBox="" xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </button>
+
+    <ul class='flex lg:ml-16 lg:space-x-3 max-lg:space-y-2 max-lg:block max-lg:w-full max-lg:mt-6'>
+        <li><a href='/about-us'
+            class='lg:hover:text-[#007bff] text-black text-gray-500 block font-semibold text-lg mr-2'>About Us</a></li>
+        <!-- Check user and display corresponding links -->
+        <% if (user) { %>
+            <% if (userType == "Customer") { %>
+                <!-- For customer -->
+                <li><a href='/users/customer'
+                    class='lg:hover:text-[#007bff] text-black text-gray-500 block font-semibold text-lg mr-2'>Shop</a></li>
+            <% } else if (userType == "Vendor") { %>
+                <!-- For vendor -->
+                <li><a href='/users/vendor'
+                    class='lg:hover:text-[#007bff] text-black text-gray-500 block font-semibold text-lg mr-2'>Products</a></li>
+            <% } else if (userType == "Shipper") { %>
+                <!-- For shipper -->
+                <li><a href='/users/Shipper'
+                    class='lg:hover:text-[#007bff] text-black text-gray-500 block font-semibold text-lg mr-2'>Orders</a></li>
+            <% } %>
+        <% } else { %>
+            <li><a href='/users/customer'
+                class='lg:hover:text-[#007bff] text-black text-gray-500 block font-semibold text-lg mr-2'>Shop</a></li>
+        <% } %>
+        <li><a href='/contact-us'
+            class='lg:hover:text-[#007bff] text-black text-gray-500 block font-semibold text-lg mr-2'>Contact Us</a></li>
+        <!-- Seperating Account section and the login section -->
+        <% if (user) { %>
+            <% if (userType == "Customer") { %>
+                <!-- For customer -->
+                <li id="user" data-user-type="<%= userType %>" class="-order-1 ml-2 relative md:order-1 p-4 md:p-0 flex flex-row justify-center"><img class="w-10 md:w-8 object-cover aspect-square cursor-pointer rounded-full" src="<%= user.userPicture %>" alt="Account"></li>
+            <% } else if (userType == "Vendor") { %>
+                <!-- For vendor -->
+                <li id="user" data-user-type="<%= userType %>" class="-order-1 ml-2 relative md:order-1 p-4 md:p-0 flex flex-row justify-center"><img class="w-10 md:w-8 object-cover aspect-square cursor-pointer rounded-full" src="<%= user.userPicture %>" alt="Account"></li>
+            <% } else if (userType == "Shipper") { %>
+                <!-- For shipper -->
+                <li id="user" data-user-type="<%= userType %>" class="-order-1 ml-2 relative md:order-1 p-4 md:p-0 flex flex-row justify-center"><img class="w-10 md:w-8 object-cover aspect-square cursor-pointer rounded-full" src="<%= user.userPicture %>" alt="Account"></li>
+            <% } %>
+        <% } else { %>
+            <!-- Login button if user didnt login -->
+            <li class="-order-1 md:order-1 p-4 md:p-0 flex flex-row justify-center"><button type="button" class="mb-auto text-white bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 fa fa-sign-in-to-bracket  cursor-pointer" onclick="window.location.href='/auth/login'" alt="Login">Login</button>
+        <% } %>
+    </ul>
+  </div>
+</header>

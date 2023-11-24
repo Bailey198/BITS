@@ -1,0 +1,132 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.16/dist/tailwind.min.css">
+    <%- include("partials/head", {title: "Shipper page"}) %>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    <div id="gradient" class="fixed -z-10 top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-lime-300 via-transparent to-transparent opacity-30"></div>
+    <section class="m-2 p-1 flex flex-col">
+                                    <!-- Distribution hub info is here -->
+        <div class="flex md:flex-row justify-center m-1 p-1 flex-col"> 
+            <div class="m-2 p-1 md:w-3/5 shadow-lg w-full ">
+                <img class="bg-gradient-to-b w-h-full object-cover" src="\images\distribution-hub-2.jpg" alt="Distribution image">
+            </div>
+            <div class="m-2 p-2 md:w-2/5 flex flex-col justify-start border-gray-300 border rounded-md sm:w-full">
+                <div class="font-serif font-bold m-1 p-1">
+                    <h1 class="text-3xl text-green-600 ">
+                        Distribution Hub: <%- user.distributionHub || "Unknown" %>
+                    </h1>
+                </div>
+                <div class="flex flex-col">
+                    <p class="italic font-sans m-1 p-1">
+                        Location: <%- locals.distributionHubLocation || "Ho Chi Minh City, Vietnam" %>
+                    </p>
+                    <br>
+                    <p class="m-1 p-1 flex-col ">
+                        Distribution Hub is a leading distribution company with the cutting-edge technology. Our mission is to provide the fastest delivery to our clients across Ho Chi Minh City.
+                    </p>
+                </div>
+            </div>
+        </div>
+                                    <!-- Distribution hub info is here -->
+                                    <!-- Active order is here -->
+        <div class="flex flex-col m-1 p-1">
+            <div class="bg-gray-100 min-h-screen m-2 p-2">
+                <div>
+                    <div class="container mx-auto px-4 py-8 m-3">
+                        <h1 class="text-3xl font-bold m-4 p-2 text-center">Active Orders</h1>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 overflow-auto hidden md:block">
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="text-center w-64 font-bold py-2 px-4 border-b-2 border-gray-300">Order ID</th>
+                                    <th class="text-center font-bold py-2 px-4 border-b-2 border-gray-300">Shippper Name</th>
+                                    <th class="text-center font-bold py-2 px-4 border-b-2 border-gray-300">Delivery Address</th>
+                                    <th class="text-center font-bold py-2 px-4 border-b-2 border-gray-300">Total Amount</th>
+                                    <th class="text-center w-32 font-bold py-2 px-4 border-b-2 border-gray-300">Status</th>
+                                    <th class="text-center w-44 font-bold py-2 px-4 border-b-2 border-gray-300">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% activeOrders.forEach(order => { %>
+                                    <%- include('partials/order.ejs', { order: order}) %>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex flex-col md:hidden gap-y-3">
+                        <% activeOrders.forEach(order => { %>
+                                <%- include('partials/mobile_order.ejs', { order: order}) %>
+                        <% }) %>
+                    </div>
+                </div>
+
+                <!-- Inactive Orders -->
+                <div>
+                    <div class="container mx-auto px-4 py-8 m-3">
+                        <h1 class="text-3xl font-bold m-4 p-2 text-center">Inactive Orders</h1>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 overflow-auto hidden md:block">
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="text-center w-64 font-bold py-2 px-4 border-b-2 border-gray-300">Order ID</th>
+                                    <th class="text-center font-bold py-2 px-4 border-b-2 border-gray-300">Shipper Name</th>
+                                    <th class="text-center font-bold py-2 px-4 border-b-2 border-gray-300">Delivery Address</th>
+                                    <th class="text-center font-bold py-2 px-4 border-b-2 border-gray-300">Total Amount</th>
+                                    <th class="text-center w-32 font-bold py-2 px-4 border-b-2 border-gray-300">Status</th>
+                                    <th class="text-center w-44 font-bold py-2 px-4 border-b-2 border-gray-300">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% inactiveOrders.forEach(order => { %>
+                                    <%- include('partials/order.ejs', { order: order}) %>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex flex-col md:hidden gap-y-3">
+                        <% inactiveOrders.forEach(order => { %>
+                            <%- include('partials/mobile_order.ejs', { order: order}) %>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>            
+        </div>
+                                    <!-------- Footer ------->
+    </section>
+    <%- include('partials/footer.ejs') %>
+    <Script>
+        $('.status').each(function() {
+            const status = $(this).data('status')
+            switch (status) {
+                case 'Active':
+                    $(this).addClass('order-active')
+                    break;
+    
+                case 'Delivered':
+                    $(this).addClass('order-delivered')
+                    break;
+    
+                case 'Canceled':
+                    $(this).addClass('order-canceled')
+                    break;
+            
+                default:
+                    break;
+            }
+        })
+    </Script>
+</body>
+</html>

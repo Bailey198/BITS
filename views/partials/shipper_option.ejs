@@ -1,0 +1,30 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+
+
+<div class="relative inline-block py-2 px-6 my-2">
+    <button id="statusButton" class="py-2 px-4 text-center font-semibold rounded-lg shadow-md text-white bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75">
+        Active
+    </button>
+    <ul id="statusList" class="absolute hidden bg-white border border-gray-300 rounded-md shadow-lg z-10 left-1/2 transform -translate-x-1/2">
+        <li class="cursor-pointer hover:bg-gray-100 px-4 py-2" data-value="Active">Active</li>
+        <li class="cursor-pointer hover:bg-gray-100 px-4 py-2" data-value="Delivered">Delivered</li>
+        <li class="cursor-pointer hover:bg-gray-100 px-4 py-2" data-value="Cancelled">Cancelled</li>
+    </ul>
+    <form id="statusForm" action="/users/shipper/active-order/<%= order.id %>/update-status" method="post">
+        <input type="hidden" id="statusInput" name="status" value="">
+    </form>
+</div>
+
+
+<script>
+    var status = '<%= order.status %>';
+</script>
+
+<script src="/js/dropdown_shipper_page.js"></script>

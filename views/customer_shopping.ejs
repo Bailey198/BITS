@@ -1,0 +1,83 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("partials/head", {title: "Customer page"}) %>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    <main class="px-6 py-2">
+        <div id="gradient" class="fixed -z-10 top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-lime-300 via-transparent to-transparent opacity-30"></div>
+        <section class="mt-8">
+            <!-- Category -->
+            <div class="pb-6 pt-4 border-b border-gray-300 flex justify-between">
+                <h1 class="capitalize font-bold text-2xl md:text-4xl"><%= locals.category ?  category : 'All products' %></h1>
+                <div class="flex justify-center gap-4 items-center">
+                    <!-- Sort function -->
+                    <div class="relative">
+                        <div class="sort flex justify-center gap-2 items-center cursor-pointer text-gray-400 [&_div:hover]:text-gray-500">
+                            <span class="font-medium text-gray-900"><%= sortValue %></span>
+                            <svg class="h-5 w-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path></svg>
+                        </div>
+                        <form class="drop-down-container sortForm [&_button:hover]:bg-violet-50">
+                            <button type="submit" id="default" value="" class="drop-down-ele">Default</button>
+                            <button type="submit" id="priceAsc" value="priceAsc" class="drop-down-ele">Price ascending</button>
+                            <button type="submit" id="priceDesc" value="priceDesc" class="drop-down-ele">Price descending</button>
+                        </form>
+                    </div>
+                    <!-- Filter function (for mobile) -->
+                    <div id="filter-btn" class="md:hidden text-gray-400 [&_div:hover]:text-gray-500">
+                        <svg class="h-5 w-5 cursor-pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 14L4 5V3H20V5L14 14V20L10 22V14Z"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products -->
+            <div class="flex">
+                <!-- Filter here -->
+                <div id="filter-menu" class="offcanvas-r transition-300 w-[40vw] md:block md:static md:w-1/5">
+                    <%- include("partials/filter"); %>
+                </div>
+                <div class="w-full md:w-4/5">   
+                    <%- include("partials/product_container"); %>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pagination -->
+        <div>
+            <div id="pagination" class="center-xy py-1" 
+                data-current-page="<%= pageInfo.currentPage %>"
+                data-total-page="<%= pageInfo.totalPage %>"
+                data-page-size="<%= pageInfo.pageSize %>">
+              
+                <% //for (let i = 1; i <= (pageInfo.totalPage > 3 ? 3 : pageInfo.totalPage); i++) { %>
+                    <% //if (pageInfo.currentPage >  3) { %>
+                      
+                    <% //} else { %>
+                        
+                    <% //} %>
+                <% //} %>
+                <% //if (pageInfo.totalPage > 3) { %>
+                    <span class="page-link cursor-pointer" data-page-number="<%= //pageInfo.totalPage %>"><%= //pageInfo.totalPage %></span> -->
+                <% //} %>
+            </div>
+            <div class="center-xy text-gray-500 my-2">
+                Displaying: <%= ((pageInfo.currentPage - 1) * pageInfo.pageSize) + 1 %> - <%= (pageInfo.currentPage * pageInfo.pageSize) > pageInfo.numberOfProducts ? pageInfo.numberOfProducts : (pageInfo.currentPage * pageInfo.pageSize) %> of <%= pageInfo.numberOfProducts %>
+            </div>
+        </div>
+    </main>
+    <%- include("partials/footer.ejs"); %>
+    <script src="/js/pagination.js"></script>
+    <script src="/js/filter_panel.js"></script>
+    <script src="/js/query.js"></script>
+</body>
+</html>
