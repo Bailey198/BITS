@@ -3,21 +3,22 @@ import React from 'react';
 import Banner from './components/Banner';
 import Header from './components/Header';
 import Nav from './components/Nav';
-import About from './components/About';
-import Services from './components/Services';
-import Work from './components/Work';
-import Contact from './components/Contact';
+import Reviews from './components/Reviews';
+import Shopping from './components/Shopping';
+import Info from './components/Info';
 
 const App = () => {
   return (
     <div className='bg-site bg-no-repeat bg-cover overflow-hidden'>
       <Header />
       <Banner />
+      <section className='section justify-center'>_______________________________</section>
       <Nav />
-      <About />
-      <Services />
-      <Work />
-      <Contact />
+      <Info />
+      <section className='section justify-center'>_______________________________</section>
+      <Reviews />
+      <section className='section justify-center'>_______________________________</section>
+      <Shopping />
       <div className='h-[4000px]'></div> 
     </div>
   );

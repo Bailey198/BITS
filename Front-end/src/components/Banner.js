@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Image1 from '../assets/wibuImpact.png';
 import Image2 from '../assets/game2.png';
-import Image3 from '../assets/game3.png';
+import Image3 from '../assets/game3.jpg';
 import Image4 from '../assets/game4.png';
-import { FaYoutube, FaFacebook, FaDiscord} from 'react-icons/fa';
 import { TypeAnimation } from 'react-type-animation';
 import {motion} from 'framer-motion';
 import { fadeIn } from '../variants';
@@ -24,11 +23,11 @@ const Banner = () => {
       <div className='container mx-auto'>
         <div className='relative '>
           {/* image */}
-          <div className='flex flex-col justify-between'>
-            <div>
-              <img className='object-cover w-full h-full rounded-xl' src={activeImg} alt=''/>
-            </div>
-            <div className='flex flex-row justify-end h-24 p-5'>
+          <div className='flex flex-col justify-between relative'>
+            <motion.div>
+              <img className='object-cover rounded-xl' src={activeImg} alt=''/>
+            </motion.div>
+            <div className='flex flex-row absolute bottom-5 right-0 justify-end h-24 pt-5'>
                 <img src={images.img1} alt="" className='w-24 h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img1)}/>
                 <img src={images.img2} alt="" className='w-24 h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img2)}/>
                 <img src={images.img3} alt="" className='w-24 h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img3)}/>
@@ -36,20 +35,35 @@ const Banner = () => {
             </div>
           </div>
           {/* text */}
-          <div className="absolute top-0 px-5 py-5 bg-gray-500/50 w-full ">
-            <h1>
+          <div className="flex-1 absolute top-0 px-5 py-5 bg-gray-500/50 w-full ">
+            <motion.h1
+              variants={fadeIn('down', 0.5)}
+              initial = 'hidden'
+              whileInView={'show'}
+              viewport={{once: false, amount: 0.7 }}
+              className='text-[40px] font-bold leading-[0.8] lg:text-[70px] pb-3' 
+            >
               <b>Wibu <span>Impact</span></b>
-            </h1>
-            <div>
+            </motion.h1>
+            <motion.div
+             variants={fadeIn('down', 0.3)}
+             initial = 'hidden'
+             whileInView={'show'}
+             viewport={{once: false, amount: 0.7 }}
+             className='text-[15px] lg:text-[22px] font-semibold uppercase leading-[1]'
+            >
               <span>Best Open World RPG</span>
               <TypeAnimation sequence={[
-                '65 millions Active Players. Explore the games vast open world alone or team up with friends to take on challenging fights',
+                '65 millions Active Players are waiting for you.',
                 2000,
-              ]}/>
-            </div>
+                'Explore the games vast open world alone or team up with friends to take on challenging fights.',
+                2000,
+              ]}
+              speed={50}
+              repeat={Infinity}
+              />
+            </motion.div>
           </div>
-
-          
         </div>
       </div>
     </section>

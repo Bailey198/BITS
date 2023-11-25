@@ -1,7 +1,8 @@
 import React from 'react';
-
-import { BiHomeAlt, BiUser } from 'react-icons/bi';
-import { BsClipboardData, BsBriefcase, BsChatSquare, BsChatSquareText } from 'react-icons/bs';
+import { GrInfo } from "react-icons/gr";
+import { BiHomeAlt } from 'react-icons/bi';
+import { BsChatSquareText } from 'react-icons/bs';
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 import { Link } from 'react-scroll';
 
@@ -20,33 +21,26 @@ const Nav = () => {
               className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
               <BiHomeAlt />
             </Link>
-            <Link to='about' 
+            <Link to='info' 
               activeClass='active'
               smooth={true}
               spy={true}
               className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
-              <BiUser />
+              <GrInfo />
             </Link>
-            <Link to='services'
-              activeClass='active'
-              smooth={true}
-              spy={true}
-              className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
-              <BsClipboardData />
-            </Link>
-            <Link to='work'
-              activeClass='active'
-              smooth={true}
-              spy={true}
-              className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
-              <BsBriefcase />
-            </Link>
-            <Link to='contact'
+            <Link to='reviews'
               activeClass='active'
               smooth={true}
               spy={true}
               className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
               <BsChatSquareText />
+            </Link>
+            <Link to='shopping'
+              activeClass='active'
+              smooth={true}
+              spy={true}
+              className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
+              <MdOutlineShoppingCart />
             </Link>
         </div>
       </div>
