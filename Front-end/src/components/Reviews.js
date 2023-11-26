@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
+import { fadeIn } from '../variants';
 
 const reviews = [
   {
@@ -49,7 +51,12 @@ const Reviews = () => {
       <div className='container mx-auto'>
         <div className='flex'>
 
-          <div className='flex-1'>
+          <motion.div 
+          variants={fadeIn('right', 0.3)}
+          initial='hidden'
+          whileInView={'show'}
+          viewport={{ once: false, amount: 0.3 }}
+          className='flex-1'>
             <div className='flex flex-col mb-20 mt-20 items-center'>
               {/* Score */}
               <div className='flex '>
@@ -88,9 +95,14 @@ const Reviews = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className='flex-1'>
+          <motion.div 
+          variants={fadeIn('right', 0.3)}
+          initial='hidden'
+          whileInView={'show'}
+          viewport={{ once: false, amount: 0.3 }}
+          className='flex-1'>
             <div>
               {/* reviews list */}
               {reviews.map((review, index) => {
@@ -116,7 +128,7 @@ const Reviews = () => {
                 )
               })}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

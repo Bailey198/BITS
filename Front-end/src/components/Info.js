@@ -15,14 +15,14 @@ const Info = () => {
   return (
     <div className='section' id='info' ref={ref}>
       <div className='container mx-auto'>
-        <div className='flex gap-10 items-center'>
+        <div className='flex flex-col gap-10 lg:flex-row items-center'>
           {/*img*/}
           <motion.div
             variants={fadeIn('right', 0.3)}
             initial='hidden'
             whileInView={'show'}
             viewport={{ once: false, amount: 0.3 }}
-            className='flex-1 bg-about bg-contain bg-no-repeat h-[500px] mix-blend-lighten bg-top'></motion.div>
+            className='flex-1 bg-about bg-contain bg-no-repeat h-[500px] mix-blend-lighten bg-center'></motion.div>
 
           {/*text*/}
           <motion.div
