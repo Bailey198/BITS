@@ -1,25 +1,29 @@
 import React from 'react';
 // components
-import Banner from './components/Banner';
-import Header from './components/Header';
-import Nav from './components/Nav';
-import Reviews from './components/Reviews';
-import Shopping from './components/Shopping';
-import Info from './components/Info';
+import 'react-toastify/dist/ReactToastify.css';
+import DetailProduct from './components/DetailPage/DetailProduct';
+import FormLogin from './components/LoginPage/FormLogin';
+import { Route, Routes } from 'react-router-dom';
+import { PrivateRoutes } from './layouts/PrivateRoutes';
+import { PublicRoutes } from './layouts/PublicRoutes';
+import { Layout } from './layouts/Layout';
 
 const App = () => {
   return (
-    <div className='bg-site bg-no-repeat bg-cover overflow-hidden'>
-      <Header />
-      <Banner />
-      <section className='section justify-center'>_______________________________</section>
-      <Nav />
-      <Info />
-      <section className='section justify-center'>_______________________________</section>
-      <Reviews />
-      <section className='section justify-center'>_______________________________</section>
-      <Shopping />
-      <div className='h-[4000px]'></div> 
+    <div>
+      <Routes>
+        <Route element={<Layout/>}>
+          {/* public */}
+          <Route element={<PublicRoutes />}>
+            <Route path='/login' element={<FormLogin />} />
+          </Route>
+
+          {/* private */}
+          <Route element={<PrivateRoutes />}>
+            <Route path='/' element={<DetailProduct />} />
+          </Route>
+        </Route>
+      </Routes>
     </div>
   );
 };
