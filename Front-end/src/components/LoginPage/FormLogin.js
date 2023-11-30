@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import bgVideo from '../../assets/bgLive.mp4'
-import Login from './Login'
-import Register from './Register'
+import React, { useState } from 'react';
+import bgVideo from '../../assets/bgLive.mp4';
+import Login from './Login';
+import Register from './Register';
 
 const FormLogin = () => {
     const [form, setForm] = useState('Login')
