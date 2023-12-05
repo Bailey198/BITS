@@ -1,0 +1,45 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+<div id="category-bar" class="w-full">
+    <nav class="flex px-4 md:px-12 py-4 w-full justify-between  flex-row-reverse">
+
+        <!-- Category list for mobile devices -->
+        <div id="cate-btn" class="flex justify-center gap-2 items-center cursor-pointer text-gray-400 hover:text-gray-500 md:hidden">
+            <span class="font-medium text-gray-900">Categories</span>
+            <svg class="h-5 w-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path></svg>
+        </div>
+
+        <!-- Category list -->
+        <ul id="cate-sidemenu" class="whitespace-nowrap bg-white offcanvas-l [&_li]:w-full [&_li]:text-center [&_a]:px-12 [&_a]:py-4 [&_a:hover]:bg-violet-200 sidemenu-transition-300 md:static md:flex-row md:bg-transparent md:[&_a]:p-0 md:gap-6  md:[&_a:hover]:bg-transparent md:[&_a:hover]:text-violet-400">
+            <li><a class="block" href="/users/customer?category=Men's">Men's</a></li>
+            <li><a class="block" href="/users/customer?category=Women's">Women's</a></li>
+            <li><a class="block" href="/users/customer?category=Gear and Equipment">Gear & Equipment</a></li>
+            <li><a class="block" href="/users/customer?category=Supplement">Supplement</a></li>
+        </ul>
+
+        <!-- Search bar -->
+        <div class="flex gap-4 justify-end w-1/2 md:w-1/3">
+            <form id="searchForm" class="inline-flex justify-end w-full" action="/users/customer" method="get">
+                <input class="px-4 py-[0.125rem] w-full border border-solid border-gray-500 rounded-l-2xl focus:outline-none focus:border-black" type="text" name="name" placeholder="Search" value="<%= locals.searchOption ?  searchOption.name : '' %>">
+                <button class="px-4 py-[0.125rem] border border-solid bg-white border-gray-500 rounded-r-2xl" type="submit"><img class="w-5" src="./../../svg/search.svg" alt="Search"></button>
+            </form>
+            
+            <a class="relative center-xy" href="/users/customer/shopping-cart">
+                <img class="w-7" src="/svg/shopping-cart.svg" alt="Shopping cart">
+                <% if (cart.length !== 0) { %>
+                    <span class="noti-circle inline-flex rounded-full border-solid border-2 border-white absolute -top-[3px] -right-[6.8px] center-xy text-white text-center aspect-square font-semibold w-[18px] h-[18px] bg-violet-500">
+                        <span class="-translate-y-[0.4px]" ><%= cart.length %></span>
+                    </span>
+                <% } %>
+            </a>
+        </div>
+    </nav>
+</div>
+
+

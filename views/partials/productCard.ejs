@@ -1,0 +1,42 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+
+<div class="flex flex-col m-1 rounded-lg shadow-lg cursor-pointer overflow-hidden [&:hover_img]:scale-105"
+    onclick="location.href='/users/customer/<%= product._id %>'">
+
+                <!-- IMG of products -->
+    <div class="flex overflow-hidden aspect-square">
+        <img class='shadow-sm w-h-full object-scale-down transition-300' src="<%= product.imageCoverData %>" alt="hero-image-2">
+    </div>
+
+                <!-- Div for info of products -->
+    <div class="flex flex-col p-2 bg-white">
+
+                <!-- Product's name -->
+        <div class="">
+            <h2 class='font-mono font-extrabold text-lg text-left ellipsis-2'>
+                <%- locals.product ? product.name : "Sample product" %>
+            </h2>
+        </div>
+
+                <!-- Product's description -->
+        <div class="">
+            <p class="font-normal text-sm">
+                <%- locals.product ? product.brand : "Sample brand" %>
+            </p>
+        </div>
+                <!-- Product's price -->
+        <div class="relative center-y"> 
+            <p class="font-semibold text-2xl">
+                $<%- locals.product ? product.price : "00.00" %>
+            </p>
+            <button class="center-xy hover:shadow-xl hover:-translate-y-1 transition-300 ml-auto p-2 rounded-full border-solid-1 border-gray-300"><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z" fill="rgba(173,184,194,1)"></path></svg></button>
+        </div>
+    </div>
+</div>

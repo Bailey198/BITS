@@ -1,0 +1,28 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+<!-- Shows errors when user login incorrectly -->
+<% if (typeof errors != 'undefined' ) { %> 
+    <% errors.forEach(function(error) { %>
+    <p style="color: red;"><%= error.msg %></p>
+    <% }) %>
+<% } %>
+
+<% if(success_msg != '') { %>
+    <p style="color: green;"><%= success_msg %></p>
+<% } %>
+
+<% if(error_msg != '') { %>
+    <p style="color: red;"><%= error_msg %></p>
+<% } %>
+
+<% if(error != '') { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+

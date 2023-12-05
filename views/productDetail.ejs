@@ -1,0 +1,104 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("partials/head", {title: "Vendor add product"}) %>
+    <script defer src="/js/quantityControl.js"></script>
+</head>
+<body>
+    <header>
+        <%- include("partials/nav_bar"); %>
+        <%- include("partials/category_bar.ejs"); %>
+    </header>
+    <main class="px-[10%]">
+        <section class="py-10">
+            <!-- Breadcrumbs -->
+            <div class="w-full overflow-hidden text-ellipsis text-gray-400 [&_a:hover]:text-green-400">
+                <% const urlCategory = product.category.replace(/\s/g, '+') %>
+                <a href="/">Home</a>
+                <span>/</span>
+                <a href="/users/customer?category=<%= urlCategory %>"><%- product.category %></a>
+                <span>/</span>
+                <p class="inline text-ellipsis text-gray-700"><%- product.name %></p>
+            </div>
+
+            <!-- Product -->
+            <div class="center-x flex flex-col sm:flex-row sm:gap-4">
+
+                <!-- Image -->
+                <div class="aspect-square w-full sm:w-2/5 mb-4 sm:mb-0">
+                    <img class='shadow-sm w-h-full object-contain transition-300' src="<%= product.imageCoverData%>" alt="hero-image-2">
+                </div>
+
+                <!-- Information -->
+                <div class="flex flex-col w-full sm:w-3/5">
+                    <!-- Brand -->
+                    <h2 class="text-lg uppercase tracking-wider text-gray-400"><%- product.brand %></h2>
+                    <!-- Name -->
+                    <h1 class="text-3xl ellipsis-2 font-semibold"><%- product.name %></h1>
+                    <!-- Price -->
+                    <p class="text-2xl mt-2 font-semibold">$<%- product.price %></p>
+                    <!-- Publisher -->
+                    <div class="mt-2">
+                        <p class="text-sm inline">Publisher: <span class="text-gray-400"><%= product.publisher.businessName %></span></p>
+                    </div>
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-x-2">
+                        <p class="text-sm inline">Tags:</p>
+                        <% product.tags.forEach(tag => { %>
+                            <a class="tag" href="#"><%- tag %></a>
+                        <% }); %>
+                    </div>
+                    <!-- Description -->
+                    <p class="mt-4 text-gray-400"><%- product.description %></p>
+
+                    <!-- Quantity -->
+                    <div class="mt-auto flex flex-col">
+                        <div class="center-xy gap-3 my-2 mr-auto">
+                            <p class="text-lg">Quantity: </p>
+                            <div class="center-x rounded-md border-solid-1 border-gray-300">
+                                <!-- Decrease value -->
+                                <button id="quantityDecrease" class="px-2 py-2"><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 12L14 6V18L8 12Z"></path></svg></button>
+                                <!-- Value -->
+                                <div id="editableQuantity" contenteditable="true" class="px-2 py-2 focus:outline-none">1</div> 
+                                <!-- Increase value -->
+                                <button id="quantityIncrease" class="px-2 py-2"><svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 12L10 18V6L16 12Z"></path></svg></button>
+                            </div>
+                            <p id="stock" data-stock="<%= product.stock %>" class="text-gray-400"><%- product.stock %> item(s) available</p>
+                        </div>
+                        <div class="center-xy gap-3 mt-2">
+                            <button id="addToCart" class="px-4 py-2 rounded-md bg-lime-500 text-white w-2/3">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <%- include("partials/footer.ejs"); %>
+    <form id="addProduct"action="/users/customer/<%= product.id %>/add" method="get">
+        <input type="hidden" name="productQuantity" id="productQuantity" value="1">
+    </form>
+
+    <!-- This add product in cart -->
+    <script>
+        $(document).ready(function () {
+            const addToCart = $("#addToCart")
+            const addToCartForm = $("#addProduct")
+            const productQuantity = $('#productQuantity')
+    
+            addToCart.on('click', () => {
+                productQuantity.val(parseInt($('#editableQuantity').text()))
+                addToCartForm.submit()
+            })
+        })
+    </script>
+</body>
+
+</html>

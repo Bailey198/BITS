@@ -1,0 +1,64 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+<aside class="w-full p-4">
+    <form id="filterForm" class="queryForm flex flex-col" action="/users/customer" method="get">
+        <h3 class="sr-only">Categories</h3>
+
+        <!-- Filter -->
+        <!-- Price filter -->
+        <div class="border-t border-gray-300 py-6">
+          <%- include('filter_expand', {filterType: "Price"}) %>
+            <!-- Show/hide filter -->
+          <div class="filter-subpanel pt-6 hidden">
+            <div class="space-y-6">
+
+              <div class="center-xy">
+                <div class="relative">
+                  <label class="absolute left-2 top-1/2 text-gray-500 -translate-y-1/2" for="minPrice">$</label>
+                  <input class="w-h-full px-1 py-[6px] text-right appearance-none border-solid-1 border-black rounded-lg" type="number" id="minPrice" name="minPrice" min="0" value="<%= minMaxPrice[0] || '' %>">
+                </div>
+                <div class="text-xl px-2">-</div>
+                <div class="relative">
+                  <label class="absolute left-2 top-1/2 text-gray-500 -translate-y-1/2" for="maxPrice">$</label>
+                  <input class="w-h-full px-1 py-[6px] text-right appearance-none border-solid-1 border-black rounded-lg" type="number" id="maxPrice" name="maxPrice" min="0" value="<%= minMaxPrice[1] || '' %>">
+                </div>
+              </div>
+
+            </div>
+          </div>
+      </div>
+
+        <!-- Tags filter -->
+        <div class="border-t border-gray-300 py-6">
+            <!-- Filter button  -->
+            <%- include('filter_expand', {filterType: "Tags"}) %>
+            <!-- Show/hide filter -->
+            <div class="filter-subpanel pt-6 hidden">
+              <div class="space-y-6">
+
+                <% locals.tags.forEach(tag => { %>
+                  <div class="flex items-center">
+                    <% if (selectedTags.includes(tag)) { %>
+                      <input checked id="<%= tag.replace(' ', '-') %>" name="tags" value="<%= tag %>" type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <% } else { %>
+                      <input id="<%= tag.replace(' ', '-') %>" name="tags" value="<%= tag %>" type="checkbox"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <% } %>
+                    <label for="<%= tag.replace(' ', '-') %>" class="ml-3 min-w-0 flex-1 select-none text-gray-500"><%= tag %></label>
+                  </div>
+                <% }); %>
+
+
+              </div>
+            </div>
+        </div>
+        <button class="w-full py-1 rounded-md border-solid-1 border-gray-300 transition-300 hover:bg-gray-300 hover:text-white" type="submit">Filter</button>
+    </form>
+</aside>

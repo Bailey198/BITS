@@ -1,0 +1,28 @@
+<!-- RMIT University Vietnam -->
+<!-- Course: COSC2430 Web Programming -->
+<!-- Semester: 2023B -->
+<!-- Assessment: Assignment 2 -->
+<!-- Author: Nguyen Tu Quoc Thai ,Nguyen Minh Trong Nhan, Tran Hoang Khiem -->
+<!-- ID: s3957050, s3924462, s3966954 -->
+<!-- Acknowledgement: W3School, TailwindCss, ChatGPT, Passport documentation, RemixIcons, Freepik, Web Dev Simplified -->
+
+<h3 class="-my-3 flow-root">
+
+    <!-- Expand/collapse section button -->
+    <button type="button" class="filter-panel flex w-full items-center justify-between bg-white pr-2 py-3 text-gray-400 hover:text-gray-500" aria-expanded="false">
+      <span class="font-medium text-gray-900"><%= locals.filterType || "Defaut filter" %></span>
+      <span class="ml-6 flex items-center">
+
+        <!-- Expand icon -->
+        <svg class="show-icon h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"></path>
+        </svg>
+
+        <!-- Collapse icon -->
+        <svg class="hide-icon h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z" clip-rule="evenodd"></path>
+        </svg>
+
+      </span>
+    </button>
+  </h3>
