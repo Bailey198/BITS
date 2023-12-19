@@ -2,19 +2,6 @@ Web-Application
 BITS
 
 
-Existing accounts to test:
-
-    Customer: username: Thai1234
-              password: Tha!1234
-
-              
-    Vendor:   username: Thai12345!
-              password: Tha!1234
-
-
-    Shipper:  
-            username: Khiem1234
-            password: Kh!iem1234
               
 
 Website starting procedures:
