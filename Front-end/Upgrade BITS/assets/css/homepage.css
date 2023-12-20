@@ -6,11 +6,11 @@
 }
 
 body{
-    background-color: #9a9a9a;
+    background-color: #E0F4F7;
 }
 
 .container-fluid {
-    background-color: #878787;
+    background-color: #f3f3f3;
     padding: 10px 0;
 }
 
@@ -20,15 +20,17 @@ body{
 }
 
 body {
-    background-color: #ceffff;
+    background-image:url('BG_4k.jpg');
+    
+    background-size: contain;
 }
 
 /* Display each link inside the navigation bar */
 .logo{
     flex: 1;
     border-radius: 10px;
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 145px;
 }
 
 .search-bar {
