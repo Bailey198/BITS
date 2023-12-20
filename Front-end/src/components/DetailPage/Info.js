@@ -6,7 +6,8 @@ import { fadeIn } from '../../variants';
 import { TypeAnimation } from 'react-type-animation';
 
 
-const Info = () => {
+const Info = (props) => {
+  const {description} = props;
   const [ref, inView] = useInView({
     threshold: 0.5,
   })
@@ -32,12 +33,8 @@ const Info = () => {
             className='flex-1'>
             <h2 className='h2 text-accent'>Game Info</h2>
             <h3 className='h3 mb-4'>Gameplay</h3>
-            {inView ? <TypeAnimation sequence={[
-              'The combat in Wibu Impact is fast-paced and action-packed, with a wide range of characters and weapons to choose from. Each character has unique abilities that can be combined in creative ways, making combat dynamic and engaging. Switching between characters can be done quickly during combat, allowing the player to play with no braincell.',
-              3000,
-            ]}
-              speed={80}
-            /> : null}
+            {inView ? <div>{description}</div>
+            : null}
             <div className='flex gap-x-6 lg:gap-x-10 mb-12 mt-12 justify-center'>
               <div>
                 <div className='text-[30px] font-tertiary text-gradient mb-2'>

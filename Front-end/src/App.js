@@ -16,6 +16,8 @@ import Orders from './components/AdminDashboard/Orders';
 import Customers from './components/AdminDashboard/Customers';
 import { AddUser } from './components/AdminDashboard/AddUser';
 import { UpdateUser } from './components/AdminDashboard/UpdateUser';
+import { AddProduct } from './components/AdminDashboard/AddProduct';
+import { UpdateProduct } from './components/AdminDashboard/UpdateProduct';
 
 
 const App = () => {
@@ -31,12 +33,14 @@ const App = () => {
           {/* private */}
           <Route element={<PrivateRoutes />}>
             <Route element={<Main/>}>
-              <Route path='/' element={<DetailProduct />} />
-              <Route path='/home' element={<HomePage />}/>
+              <Route path='/detail-product/:id' element={<DetailProduct />} />
+              <Route path='/' element={<HomePage />}/>
             </Route>
             <Route element={<AdminLayout/>}>
               <Route path='/Admin' element={<Dashboard />} />
               <Route path='/Admin/products' element={<Product />} />
+              <Route path='/Admin/add-product' element={<AddProduct />} />
+              <Route path='/Admin/update-product/:id' element={<UpdateProduct />} />
               <Route path='/Admin/customers' element={<Customers />} />
               <Route path='/Admin/orders' element={<Orders />} />
               <Route path='/Admin/add_user' element={<AddUser />} />

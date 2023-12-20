@@ -1,29 +1,45 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import requestApi from '../../helpers/api';
 import { toast } from 'react-toastify';
 
-export const AddProduct = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
 
-    const handleSubmitFormAdd = async (data) => {
-        console.log('data form', data);
+export const UpdateProduct = () => {
+    const { register, setValue, handleSubmit, formState: { errors } } = useForm();
+    const params = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
         dispatch(actions.controlLoading(true))
         try {
-            const res = await requestApi('/products', 'POST', data);
-            console.log('res=>', res)
+            const getDetailProduct = async () => {
+                const res = await requestApi(`/products/${params.id}`, 'GET', []) // requestApi(`/users/${params.id}`, 'GET', [])
+                console.log("res =>", res)
+                dispatch(actions.controlLoading(false))
+
+                const fields = ['title', 'description', 'price']
+                fields.forEach((field) => { setValue(field, res.data[field]) })
+            }
+            getDetailProduct()
+        } catch (error) {
+            console.log("error =>", error)
             dispatch(actions.controlLoading(false))
-            toast.success('Add new product successfully!', { position: 'top-center', autoClose: 2000 })
+        }
+    }, [])
 
-            setTimeout(() => {
-                navigate('/Admin/products')
-            }, 3000);
-
+    const handleSubmitFormUpdate = async (data) => {
+        console.log(data);
+        dispatch(actions.controlLoading(true))
+        try {
+            const res = await requestApi(`/products/${params.id}`, 'PUT', data)
+            console.log('res => ', res)
+            dispatch(actions.controlLoading(false))
+            toast.success('User has been Updated successfully!', { position: 'top-center', autoClose: 2000 })
+            setTimeout(() => navigate('/Admin/products'), 3000);
         } catch (error) {
             console.log('error =>', error)
             dispatch(actions.controlLoading(false))
@@ -49,7 +65,7 @@ export const AddProduct = () => {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <Link to='/Admin/products' className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
-                                Product Management
+                                Products Management
                             </Link>
                         </div>
                     </li>
@@ -59,7 +75,7 @@ export const AddProduct = () => {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-                                Add Product
+                                Update Product
                             </span>
                         </div>
                     </li>
@@ -103,9 +119,9 @@ export const AddProduct = () => {
                             <button
                                 type='button'
                                 className="btn p-3 text-center w-full"
-                                onClick={handleSubmit(handleSubmitFormAdd)}
+                                onClick={handleSubmit(handleSubmitFormUpdate)}
                             >
-                                Add New Product
+                                Update Product
                             </button>
                         </form>
                     </div>

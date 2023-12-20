@@ -8,10 +8,8 @@ const HomePage = () => {
     <div>
       <Banner />
       <section className='section justify-center'>_______________________________</section>
-      <Nav />
       <GameList />
-      <section className='section justify-center'>_______________________________</section>
-      
+      <Nav />
       <div className='h-[1500px]'></div>
     </div>
   )

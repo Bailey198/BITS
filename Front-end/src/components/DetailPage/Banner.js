@@ -7,7 +7,8 @@ import { TypeAnimation } from 'react-type-animation';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../../variants';
 
-const Banner = () => {
+const Banner = (props) => {
+  const {title} = props;
 
   const [images, setImages] = useState({
     img1: Image1,
@@ -43,7 +44,7 @@ const Banner = () => {
               viewport={{ once: false, amount: 0.7 }}
               className='text-[40px] font-bold leading-[0.8] lg:text-[70px] pb-3'
             >
-              <b>Wibu <span>Impact</span></b>
+              <b>{title}</b>
             </motion.h1>
             <motion.div
               variants={fadeIn('down', 0.3)}

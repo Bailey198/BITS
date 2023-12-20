@@ -123,7 +123,7 @@ const Customers = () => {
                             </div>
                             <div className='flex-1'>
                                 {selectedRows.length > 0 &&
-                                    <button onClick={() => handleMultiDelete} type='button'
+                                    <button onClick={() => handleMultiDelete()} type='button'
                                         className='bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 border border-blue-700 rounded'>
                                         <i className='fa fa-trash'> </i> Delete all
                                     </button>}

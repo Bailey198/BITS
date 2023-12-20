@@ -4,33 +4,33 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import requestApi from '../../helpers/api';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export const AddUser = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmitFormAdd = async(data) => {
+    const handleSubmitFormAdd = async (data) => {
         console.log('data form', data);
         dispatch(actions.controlLoading(true))
-        try{
+        try {
             const res = await requestApi('/users', 'POST', data);
-            console.log('res=>',res)
+            console.log('res=>', res)
             dispatch(actions.controlLoading(false))
-            toast.success('Add new user successfully!', {position:'top-center', autoClose: 2000})
-            
+            toast.success('Add new user successfully!', { position: 'top-center', autoClose: 2000 })
+
             setTimeout(() => {
                 navigate('/Admin/customers')
             }, 3000);
 
-        }catch(error){
-            console.log('error =>',error)
+        } catch (error) {
+            console.log('error =>', error)
             dispatch(actions.controlLoading(false))
         }
     }
 
-    
+
 
     return (
         <div>
@@ -48,7 +48,7 @@ export const AddUser = () => {
                     <li>
                         <div className="flex items-center">
                             <svg className="rtl:rotate-180 block w-3 h-3 mx-1 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <Link to='/Admin/customers' className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
                                 Customers Account
@@ -58,7 +58,7 @@ export const AddUser = () => {
                     <li aria-current="page">
                         <div className="flex items-center">
                             <svg className="rtl:rotate-180  w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
                                 Add User

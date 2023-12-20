@@ -18,7 +18,8 @@ const recommendSystem = {
   Storage: '10 GB available space'
 }
 
-const Shopping = () => {
+const Shopping = (props) => {
+  const {price} = props;
   return (
     <div className='section' id='shopping'>
       <div className='container mx-auto'>
@@ -56,7 +57,7 @@ const Shopping = () => {
           <div className='flex flex-col flex-1 mx-5 items-center justify-center'>
             <h2 className='h2'>Add To Cart</h2>
             <div>
-              <button className='flex-1 btn mx-10 my-10 w-40'>Price: $60</button>
+              <button className='flex-1 btn mx-10 my-10 w-40'>Price: ${price}</button>
             </div>
           </div>
         </motion.div>

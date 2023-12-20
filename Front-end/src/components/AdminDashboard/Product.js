@@ -27,15 +27,19 @@ const Product = () => {
         },
         {
             name: 'Title',
-            element: row => row.tile
+            element: row => row.title
         },
         {
-            name: 'Price',
-            element: row => row.price
+            name: 'Price($)',
+            element: row => "$" + row.price
         },
         {
             name: 'Sales Number',
             element: row => row.sale_numbers
+        },
+        {
+          name: 'Active Player',
+          element: row => row.active_players
         },
         {
             name: 'Created At',
@@ -49,7 +53,7 @@ const Product = () => {
             name: 'Actions',
             element: row => (
                 <div className='flex justify-between m-3'>
-                    <Link to={`/Admin/update_user/${row.id}`}><i className='fa fa-pencil'> </i></Link>
+                    <Link to={`/Admin/update-product/${row.id}`}><i className='fa fa-pencil'> </i></Link>
                     <button type='button' onClick={() => handleDelete(row.id)}><i className='fa fa-trash'> </i></button>
                 </div>
             )
@@ -119,7 +123,7 @@ const Product = () => {
 
                         <div className='flex flex-col'>
                             <div className='flex-1 my-2'>
-                                <Link to='/Admin/add_user' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 border border-blue-700 rounded'>+ Add New</Link>
+                                <Link to='/Admin/add-product' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 border border-blue-700 rounded'>+ Add New</Link>
                             </div>
                             <div className='flex-1'>
                                 {selectedRows.length > 0 &&

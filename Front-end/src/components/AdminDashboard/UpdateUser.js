@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import requestApi from '../../helpers/api';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 export const UpdateUser = () => {
@@ -16,16 +16,16 @@ export const UpdateUser = () => {
     useEffect(() => {
         dispatch(actions.controlLoading(true))
         try {
-            const getDetailUser = async() => {
+            const getDetailUser = async () => {
                 const res = await requestApi(`/users/${params.id}`, 'GET') // requestApi(`/users/${params.id}`, 'GET', [])
                 console.log("res =>", res)
                 dispatch(actions.controlLoading(false))
 
-                const fields =  ['firstName', 'lastName', 'email']
-                fields.forEach((field) => {setValue(field, res.data[field])})
+                const fields = ['firstName', 'lastName', 'email']
+                fields.forEach((field) => { setValue(field, res.data[field]) })
             }
             getDetailUser()
-        }catch (error) {
+        } catch (error) {
             console.log("error =>", error)
             dispatch(actions.controlLoading(false))
         }
@@ -34,13 +34,13 @@ export const UpdateUser = () => {
     const handleSubmitFormUpdate = async (data) => {
         console.log(data);
         dispatch(actions.controlLoading(true))
-        try{
+        try {
             const res = await requestApi(`/users/${params.id}`, 'PUT', data)
             console.log('res => ', res)
             dispatch(actions.controlLoading(false))
-            toast.success('User has been Updated successfully!', {position: 'top-center', autoClose: 2000})
+            toast.success('User has been Updated successfully!', { position: 'top-center', autoClose: 2000 })
             setTimeout(() => navigate('/Admin/customers'), 3000);
-        }catch(error){
+        } catch (error) {
             console.log('error =>', error)
             dispatch(actions.controlLoading(false))
         }
@@ -62,7 +62,7 @@ export const UpdateUser = () => {
                     <li>
                         <div className="flex items-center">
                             <svg className="rtl:rotate-180 block w-3 h-3 mx-1 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <Link to='/Admin/customers' className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
                                 Customers Account
@@ -72,7 +72,7 @@ export const UpdateUser = () => {
                     <li aria-current="page">
                         <div className="flex items-center">
                             <svg className="rtl:rotate-180  w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
                                 Update User
