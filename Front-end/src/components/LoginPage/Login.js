@@ -59,7 +59,11 @@ const Login = () => {
                 localStorage.setItem('access_token', res.data.access_token);
                 localStorage.setItem('refresh_token', res.data.refresh_token);
                 dispatch(actions.controlLoading(false));
-                navigate('/')
+                if(res.data.role === 'Admin'){
+                    navigate('/Admin')
+                }else{
+                    navigate('/')
+                }  
             }).catch((err) => {
                 dispatch(actions.controlLoading(false));
                 console.log(err)
