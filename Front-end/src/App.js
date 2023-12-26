@@ -18,37 +18,48 @@ import { AddUser } from './components/AdminDashboard/AddUser';
 import { UpdateUser } from './components/AdminDashboard/UpdateUser';
 import { AddProduct } from './components/AdminDashboard/AddProduct';
 import { UpdateProduct } from './components/AdminDashboard/UpdateProduct';
+import { Cart } from './components/LandingPage/Cart';
+import { ShopContextProvider } from './context/shop-context';
 
 
 const App = () => {
   return (
     <div>
-      <Routes>
-        <Route element={<Layout/>}>
-          {/* public */}
-          <Route element={<PublicRoutes />}>
-            <Route path='/login' element={<FormLogin />} />
-          </Route>
+      <ShopContextProvider>
+        <Routes>
+          <Route element={<Layout />}>
+            {/* public */}
+            <Route element={<PublicRoutes />}>
+              <Route path='/login' element={<FormLogin />} />
+            </Route>
 
-          {/* private */}
-          <Route element={<PrivateRoutes />}>
-            <Route element={<Main/>}>
-              <Route path='/detail-product/:id' element={<DetailProduct />} />
-              <Route path='/' element={<HomePage />}/>
-            </Route>
-            <Route element={<AdminLayout/>}>
-              <Route path='/Admin' element={<Dashboard />} />
-              <Route path='/Admin/products' element={<Product />} />
-              <Route path='/Admin/add-product' element={<AddProduct />} />
-              <Route path='/Admin/update-product/:id' element={<UpdateProduct />} />
-              <Route path='/Admin/customers' element={<Customers />} />
-              <Route path='/Admin/orders' element={<Orders />} />
-              <Route path='/Admin/add_user' element={<AddUser />} />
-              <Route path='/Admin/update_user/:id' element={<UpdateUser />} />
+            {/* private */}
+            <Route element={<PrivateRoutes />}>
+
+
+              <Route element={<Main />}>
+                <Route path='/detail-product/:id' element={<DetailProduct />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/' element={<HomePage />} />
+              </Route>
+
+
+              <Route element={<AdminLayout />}>
+                <Route path='/Admin' element={<Dashboard />} />
+                <Route path='/Admin/products' element={<Product />} />
+                <Route path='/Admin/add-product' element={<AddProduct />} />
+                <Route path='/Admin/update-product/:id' element={<UpdateProduct />} />
+                <Route path='/Admin/customers' element={<Customers />} />
+                <Route path='/Admin/orders' element={<Orders />} />
+                <Route path='/Admin/add_user' element={<AddUser />} />
+                <Route path='/Admin/update_user/:id' element={<UpdateUser />} />
+              </Route>
+
             </Route>
           </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </ShopContextProvider>
+
     </div>
   );
 };
