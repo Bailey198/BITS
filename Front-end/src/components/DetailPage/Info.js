@@ -21,15 +21,17 @@ const Info = (props) => {
             variants={fadeIn('right', 0.3)}
             initial='hidden'
             whileInView={'show'}
-            viewport={{ once: false, amount: 0.3 }}
-            className='flex-1 bg-about bg-contain bg-no-repeat lg:h-[500px] mix-blend-lighten bg-center'></motion.div>
+            viewport={{ once: true}}
+            className='flex-1 bg-about bg-contain bg-no-repeat lg:h-[500px] mix-blend-lighten bg-center'>
+
+          </motion.div>
 
           {/*text*/}
           <motion.div
             variants={fadeIn('left', 0.3)}
             initial='hidden'
             whileInView={'show'}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             className='flex-1'>
             <h2 className='h2 text-accent'>Game Info</h2>
             <h3 className='h3 mb-4'>Gameplay</h3>
@@ -38,7 +40,7 @@ const Info = (props) => {
             <div className='flex gap-x-6 lg:gap-x-10 mb-12 mt-12 justify-center'>
               <div>
                 <div className='text-[30px] font-tertiary text-gradient mb-2'>
-                  {inView ? <CountUp start={0} end={64845911} duration={5} /> : null}
+                  {inView ? <CountUp start={0} end={64845911} duration={3} /> : null}
                 </div>
                 <div className='font-primary text-sm tracking-[2px]'>
                   Monthly <br /> Players
@@ -46,7 +48,7 @@ const Info = (props) => {
               </div>
               <div>
                 <div className='text-[30px] font-tertiary text-gradient mb-2'>
-                  {inView ? <CountUp start={0} end={4951567} duration={4} /> : null}
+                  {inView ? <CountUp start={0} end={4951567} duration={2} /> : null}
                 </div>
                 <div className='font-primary text-sm tracking-[2px]'>
                   Daily <br /> Players
@@ -54,7 +56,7 @@ const Info = (props) => {
               </div>
               <div>
                 <div className='text-[30px] font-tertiary text-gradient mb-2'>
-                  {inView ? <CountUp start={0} end={812567} duration={3} /> : null}
+                  {inView ? <CountUp start={0} end={812567} duration={1} /> : null}
                 </div>
                 <div className='font-primary text-sm tracking-[2px]'>
                   Current <br /> Players

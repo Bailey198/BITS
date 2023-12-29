@@ -1,21 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import requestApi from '../../helpers/api';
 import { toast } from 'react-toastify';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 export const AddProduct = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, setValue, handleSubmit, trigger, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [uploadImg, setUploadImg] = useState('');
+
+    const onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            const file = event.target.files[0];
+            let reader = new FileReader()
+            reader.onload = (e) => {
+                setUploadImg(reader.result)
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
     const handleSubmitFormAdd = async (data) => {
         console.log('data form', data);
+        let formData = new FormData()
+        for(let key in data){
+            if(key == 'banner_img'){
+                formData.append(key, data[key][0])
+            }else {
+                formData.append(key, data[key])
+            }
+        }
         dispatch(actions.controlLoading(true))
         try {
-            const res = await requestApi('/products', 'POST', data);
+            const res = await requestApi('/products', 'POST', formData, 'json', 'multipart/form-data');
             console.log('res=>', res)
             dispatch(actions.controlLoading(false))
             toast.success('Add new product successfully!', { position: 'top-center', autoClose: 2000 })
@@ -83,21 +106,28 @@ export const AddProduct = () => {
 
                             <div className='mb-4'>
                                 <input
-                                    {...register('description', { required: 'Description is required!' })}
-                                    type="text"
-                                    className="block border border-grey-light w-full p-3 rounded "
-                                    placeholder="Description" />
-                                {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
-
-                            </div>
-
-                            <div className='mb-4'>
-                                <input
                                     {...register('price', { required: 'Price is required!', valueAsNumber: true })}
                                     type="number"
                                     className="block border border-grey-light w-full p-3 rounded"
                                     placeholder="Price" />
                                 {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
+                            </div>
+
+                            <div className='mb-4'>
+                                <label><b>Description:</b></label>
+                                <textarea rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                 {...register('description', {required:"Description is required"})}/>
+                                {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
+
+                            </div>
+
+                            <div className='mb-4'>
+                                {uploadImg && <img src={uploadImg} className='max-w-xs rounded border bg-white p-1 dark:border-neutral-700 dark:bg-neutral-800' />
+                                }
+                                <label for="file_input"><b>Upload file</b></label>
+                                <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    aria-describedby="file_input_help" id="file_input" type="file" name='banner_img' {...register('banner_img', { required: 'Image is required!', onChange: onImageChange})} />
+                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG.</p>
                             </div>
 
                             <button

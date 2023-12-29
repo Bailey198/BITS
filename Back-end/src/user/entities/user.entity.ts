@@ -1,3 +1,4 @@
+import { Order } from 'src/order/entities/order.entity';
 import { Post } from 'src/post/entities/post.entity';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from 'typeorm';
 
@@ -38,4 +39,7 @@ export class User {
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[]
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[]
 }

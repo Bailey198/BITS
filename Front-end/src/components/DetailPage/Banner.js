@@ -8,8 +8,8 @@ import { motion } from 'framer-motion';
 import { fadeIn } from '../../variants';
 
 const Banner = (props) => {
-  const {title} = props;
-
+  const {title, bannerImg} = props;
+  const mainImg = process.env.REACT_APP_API_URL+'/'+ bannerImg;
   const [images, setImages] = useState({
     img1: Image1,
     img2: Image2,
@@ -29,7 +29,7 @@ const Banner = (props) => {
               <img className='object-cover rounded-xl' src={activeImg} alt='' />
             </motion.div>
             <div className='flex flex-row absolute bottom-5 right-0 justify-end h-12 lg:h-24 pt-5'>
-              <img src={images.img1} alt="" className='w-12 h-12 lg:w-24 lg:h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img1)} />
+              <img src={mainImg} alt="" className='w-12 h-12 lg:w-24 lg:h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(mainImg)} />
               <img src={images.img2} alt="" className='w-12 h-12 lg:w-24 lg:h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img2)} />
               <img src={images.img3} alt="" className='w-12 h-12 lg:w-24 lg:h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img3)} />
               <img src={images.img4} alt="" className='w-12 h-12 lg:w-24 lg:h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img4)} />
@@ -50,7 +50,7 @@ const Banner = (props) => {
               variants={fadeIn('down', 0.3)}
               initial='hidden'
               whileInView={'show'}
-              viewport={{ once: false, amount: 0.7 }}
+              viewport={{ once: true, amount: 0.7 }}
               className='text-[15px] lg:text-[22px] font-semibold uppercase leading-[1]'
             >
               <span>Best Open World RPG</span>

@@ -13,6 +13,7 @@ import { RolesGuard } from './auth/roles.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { User } from './user/entities/user.entity';
 import { ProductModule } from './product/product.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { ProductModule } from './product/product.module';
     PostModule,
     CategoryModule,
     TypeOrmModule.forFeature([User]),
-    ProductModule
+    ProductModule,
+    OrderModule
   ],
   controllers: [AppController],
   providers: [AppService,

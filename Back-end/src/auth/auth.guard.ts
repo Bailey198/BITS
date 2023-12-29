@@ -41,7 +41,9 @@ export class AuthGuard implements CanActivate {
             })
             const user = await this.userRepository.findOneBy({id: payload.id});
             request['user'] = user;
+            console.log('request[user]', request['user'])
             request['user_data'] = payload;
+            console.log('req[user_data]', request['user_data'].id);
         }catch{
             throw new HttpException({
                 status: 419,

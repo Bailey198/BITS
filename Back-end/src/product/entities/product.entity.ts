@@ -8,7 +8,7 @@ export class Product {
     @Column()
     title:string;
 
-    @Column()
+    @Column({type: 'longtext'})
     description:string;
 
     @Column({type:'int', default:10})

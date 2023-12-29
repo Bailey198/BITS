@@ -24,12 +24,22 @@ export class UserController {
         return this.userService.findAll(query);
     }
 
+    @UseGuards(AuthGuard)
+    @Get('current-user')
+    findCurrentUser(@Param('id') id:string, @Req() req:any): Promise<User>{
+        console.log(req['user_data'])
+        return this.userService.findCurrent(req['user_data'].email);
+    }
+
     @Roles(['Admin'])
     @UseGuards(AuthGuard)
     @Get(':id')
-    fineOne(@Param('id') id:string): Promise<User>{
+    findOne(@Param('id') id:string, @Req() req:any): Promise<User>{
+        console.log(req['user_data'])
         return this.userService.findOne(Number(id));
     }
+
+    
 
     @Post()
     @Roles(['Admin'])
@@ -56,6 +66,7 @@ export class UserController {
     delete(@Param('id') id: string) {
         return this.userService.delete(Number(id));
     }
+    
     @Post('upload-avatar')
     @UseGuards(AuthGuard)
     @UseInterceptors(FileInterceptor('avatar', {
@@ -79,7 +90,7 @@ export class UserController {
     }))
     uploadAvatar(@Req() req:any, @UploadedFile() file:Express.Multer.File) {
         console.log('upload avatar')
-        console.log('user data', req.user_data)
+        console.log('user data', req['user_data'])
         console.log(file)
         if(req.fileValidationError){
             throw new BadRequestException(req.fileValidationError);
@@ -88,6 +99,6 @@ export class UserController {
             throw new BadRequestException('File is required');
         }
         
-        return this.userService.updateAvatar(req.user_data.id, file.destination + '/' + file.filename);
+        return this.userService.updateAvatar(req['user_data'].id, file.fieldname + '/' + file.filename);
     }
 }

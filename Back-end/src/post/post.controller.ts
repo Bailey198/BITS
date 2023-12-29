@@ -46,7 +46,7 @@ export class PostController {
             throw new BadRequestException('File is required');
         }
 
-        return this.postService.create(req['user_data'].id, {...createPostDto, thumbnail: file.destination+'/'+file.filename});
+        return this.postService.create(req['user_data'].id, {...createPostDto, thumbnail: file.fieldname+'/'+file.filename});
     }
 
     @UseGuards(AuthGuard)

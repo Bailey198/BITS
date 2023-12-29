@@ -30,6 +30,10 @@ const Product = () => {
             element: row => row.title
         },
         {
+            name: 'Image',
+            element: row => <img width="70px" src={process.env.REACT_APP_API_URL+"/"+row.banner_img} />
+        },
+        {
             name: 'Price($)',
             element: row => "$" + row.price
         },

@@ -6,4 +6,5 @@ export class UpdateProductDto {
   
     price: number;
 
+    banner_img: string;
 }

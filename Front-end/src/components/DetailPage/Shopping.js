@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ShopContext } from '../../context/shop-context';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../../variants';
 
@@ -19,7 +20,10 @@ const recommendSystem = {
 }
 
 const Shopping = (props) => {
-  const {price} = props;
+  const {price, productId} = props;
+
+  const {addToCart} = useContext(ShopContext);
+
   return (
     <div className='section' id='shopping'>
       <div className='container mx-auto'>
@@ -27,7 +31,7 @@ const Shopping = (props) => {
           variants={fadeIn('left', 0.3)}
           initial='hidden'
           whileInView={'show'}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           className='flex'>
           {/* half page left */}
           <div className='flex-1 '>
@@ -57,7 +61,7 @@ const Shopping = (props) => {
           <div className='flex flex-col flex-1 mx-5 items-center justify-center'>
             <h2 className='h2'>Add To Cart</h2>
             <div>
-              <button className='flex-1 btn mx-10 my-10 w-40'>Price: ${price}</button>
+              <button onClick={() => addToCart(productId)} className='flex-1 btn mx-10 my-10 w-40'>Price: ${price}</button>
             </div>
           </div>
         </motion.div>

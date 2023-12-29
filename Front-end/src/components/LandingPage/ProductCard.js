@@ -1,23 +1,29 @@
 import React, { useContext } from 'react';
 import { ShopContext } from '../../context/shop-context';
-import gameImg from '../../assets/wibuImpact.png';
+import ReactMarkDown from 'react-markdown';
 import { Link } from 'react-router-dom';
 
 export const ProductCard = (props) => {
     const { data } = props;
-    const {addToCart, cartItems} = useContext(ShopContext);
-    
+    const { addToCart, cartItems } = useContext(ShopContext);
+    const cardImg = process.env.REACT_APP_API_URL + '/' + data.banner_img
+
     const cartItemAmount = cartItems[data.id]
     return (
         <div className="grow max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
-                <img className="rounded-t-lg" src={gameImg} alt="" />
+                <img className="rounded-t-lg" src={cardImg} alt="" />
             </a>
             <div className="p-5">
                 <a href="#">
                     <h2 className="mb-2 h2 text-accent text-2xl font-bold tracking-tight dark:text-white">{data.title}</h2>
                 </a>
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{data.description}</p>
+                <div className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+
+                    {data.description}
+
+                </div>
+
                 <div className='flex justify-between'>
                     <Link to={`/detail-product/${data.id}`} className="flex mt-auto inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white btn">
                         More Detail

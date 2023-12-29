@@ -20,6 +20,7 @@ import { AddProduct } from './components/AdminDashboard/AddProduct';
 import { UpdateProduct } from './components/AdminDashboard/UpdateProduct';
 import { Cart } from './components/LandingPage/Cart';
 import { ShopContextProvider } from './context/shop-context';
+import { PageNotFound } from './components/PageNotFound';
 
 
 const App = () => {
@@ -57,6 +58,7 @@ const App = () => {
 
             </Route>
           </Route>
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </ShopContextProvider>
 

@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import requestApi from '../../helpers/api';
 import { toast } from 'react-toastify';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 
 export const UpdateProduct = () => {
-    const { register, setValue, handleSubmit, formState: { errors } } = useForm();
+    const { register, setValue, handleSubmit, trigger, formState: { errors } } = useForm();
     const params = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [productData, setProductData] = useState({});
 
     useEffect(() => {
         dispatch(actions.controlLoading(true))
@@ -19,10 +22,13 @@ export const UpdateProduct = () => {
             const getDetailProduct = async () => {
                 const res = await requestApi(`/products/${params.id}`, 'GET', []) // requestApi(`/users/${params.id}`, 'GET', [])
                 console.log("res =>", res)
-                dispatch(actions.controlLoading(false))
-
-                const fields = ['title', 'description', 'price']
+               
+                const fields = ['title', 'price', 'description', 'banner_img']
                 fields.forEach((field) => { setValue(field, res.data[field]) })
+                
+                setProductData({...res.data, banner_img: process.env.REACT_APP_API_URL+'/'+ res.data.banner_img})
+                
+                dispatch(actions.controlLoading(false))
             }
             getDetailProduct()
         } catch (error) {
@@ -31,15 +37,49 @@ export const UpdateProduct = () => {
         }
     }, [])
 
+    const onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            let reader = new FileReader()
+            reader.onload = (e) => {
+                setProductData({...productData, banner_img: reader.result})
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+
+    // const handleUpdateImg = async () => {
+    //     let formData = new FormData()
+    //     formData.append('banner_img', updateImg.file)
+    //     await requestApi(`/products/upload-img/${params.id}`, 'POST', formData, 'json', 'multipart/form-data').then(res => {
+    //         console.log ('res =>', res)
+    //     }).catch(err => {
+    //         console.log ('err =>', err)
+    //     })
+    // }
+
     const handleSubmitFormUpdate = async (data) => {
-        console.log(data);
+        console.log('data form=>', data);
+        let formData = new FormData()
+        for(let key in data){
+            if(key == 'banner_img'){
+                if(data.banner_img[0] instanceof File){
+                    formData.append(key, data[key][0])
+                }
+            }else {
+                formData.append(key, data[key])
+            }
+        }
         dispatch(actions.controlLoading(true))
         try {
-            const res = await requestApi(`/products/${params.id}`, 'PUT', data)
-            console.log('res => ', res)
+            const res = await requestApi(`/products/${params.id}`, 'PUT', formData, 'json', 'multipart/form-data');
+            console.log('res=>', res)
             dispatch(actions.controlLoading(false))
-            toast.success('User has been Updated successfully!', { position: 'top-center', autoClose: 2000 })
-            setTimeout(() => navigate('/Admin/products'), 3000);
+            toast.success('Update product successfully!', { position: 'top-center', autoClose: 2000 })
+
+            setTimeout(() => {
+                navigate('/Admin/products')
+            }, 3000);
+
         } catch (error) {
             console.log('error =>', error)
             dispatch(actions.controlLoading(false))
@@ -99,21 +139,28 @@ export const UpdateProduct = () => {
 
                             <div className='mb-4'>
                                 <input
-                                    {...register('description', { required: 'Description is required!' })}
-                                    type="text"
-                                    className="block border border-grey-light w-full p-3 rounded "
-                                    placeholder="Description" />
-                                {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
-
-                            </div>
-
-                            <div className='mb-4'>
-                                <input
                                     {...register('price', { required: 'Price is required!', valueAsNumber: true })}
                                     type="number"
                                     className="block border border-grey-light w-full p-3 rounded"
                                     placeholder="Price" />
                                 {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
+                            </div>
+
+                            <div className='mb-4'>
+                                <label><b>Description:</b></label>
+                                <textarea rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                 {...register('description', {required:"Description is required"})}/>
+                                {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
+
+                            </div>
+
+                            <div className='mb-4'>
+                                {productData.banner_img && <img src={productData.banner_img} className='max-w-xs rounded border bg-white p-1 dark:border-neutral-700 dark:bg-neutral-800' />
+                                }
+                                <label for="file_input"><b>Upload file</b></label>
+                                <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    aria-describedby="file_input_help" id="file_input" type="file" name='banner_img' {...register('banner_img', {onChange: onImageChange})} accept='image/*' />
+                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG.</p>
                             </div>
 
                             <button

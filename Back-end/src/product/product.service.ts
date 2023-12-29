@@ -58,4 +58,8 @@ export class ProductService {
     async multipleDelete(ids: string[]): Promise<DeleteResult> {
         return await this.productRepository.delete({ id: In(ids) })
     }
+
+    async updateBannerImg(id:number, banner_img:string):Promise<UpdateResult> {
+        return await this.productRepository.update(id, { banner_img });
+    }
 }

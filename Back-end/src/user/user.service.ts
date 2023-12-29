@@ -46,6 +46,12 @@ export class UserService {
         return await this.userRepository.findOneBy({id});
     }
 
+    async findCurrent(userEmail: string):Promise<User>{
+        return await this.userRepository.findOne({
+            where: {email : userEmail},
+        })
+    }
+
     async create(createUserDto: CreateUserDto):Promise<User>{
         const hashPassword = await bcrypt.hash(createUserDto.password, 10);
         return await this.userRepository.save({...createUserDto, password: hashPassword});

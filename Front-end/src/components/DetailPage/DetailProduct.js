@@ -32,14 +32,14 @@ const DetailProduct = () => {
 
   return (
     <div>
-      <Banner title={productData.title}/>
+      <Banner title={productData.title} bannerImg={productData.banner_img}/>
       <section className='section justify-center'>_______________________________</section>
       <Nav />
       <Info description={productData.description}/>
       <section className='section justify-center'>_______________________________</section>
       <Reviews />
       <section className='section justify-center'>_______________________________</section>
-      <Shopping price={productData.price}/>
+      <Shopping price={productData.price} productId={productData.id} />
       <div className='h-[1500px]'></div>
     </div>
   );

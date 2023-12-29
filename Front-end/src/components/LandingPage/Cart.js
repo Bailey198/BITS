@@ -2,13 +2,39 @@ import React, { useContext } from 'react'
 import { ShopContext } from '../../context/shop-context';
 import { CartItem } from './CartItem';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import * as actions from '../../redux/actions';
+import requestApi from '../../helpers/api';
+import { toast } from 'react-toastify';
 import './cart.css'
 
 export const Cart = () => {
     const { productList, cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
     const totalAmount = getTotalCartAmount();
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const orderData = {orderTotal: totalAmount, address:'Hong Linh Plaza', status: 1}
+
+    const handleSubmitOrder = async (data) => {
+        
+        dispatch(actions.controlLoading(true))
+        try {
+            const res = await requestApi('/orders', 'POST', data);
+            console.log('res=>', res)
+            dispatch(actions.controlLoading(false))
+            toast.success('Your order has been received!', { position: 'top-center', autoClose: 2000 })
+    
+            setTimeout(() => {
+                navigate('/')
+                checkout();
+            }, 2000);
+    
+        } catch (error) {
+            console.log('error =>', error)
+            dispatch(actions.controlLoading(false))
+        }
+    }
 
     return (
         <div className="cart">
@@ -30,8 +56,7 @@ export const Cart = () => {
                     <button  onClick={() => navigate("/")}> Continue Shopping </button>
                     <button
                         onClick={() => {
-                            checkout();
-                            navigate("/checkout");
+                            handleSubmitOrder(orderData);
                         }}
                     >
                         {" "}
