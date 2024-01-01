@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { ShopContext } from '../../context/shop-context';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../../variants';
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
 
 const minimumSystem = {
   OS: 'Windows 7 or later',
@@ -20,6 +22,7 @@ const recommendSystem = {
 }
 
 const Shopping = (props) => {
+  
   const {price, productId} = props;
 
   const {addToCart} = useContext(ShopContext);
@@ -59,6 +62,35 @@ const Shopping = (props) => {
 
           {/* half page right */}
           <div className='flex flex-col flex-1 mx-5 items-center justify-center'>
+          <div className='flex flex-col mb-10 items-center'>
+              {/* Score */}
+              <div className='flex '>
+                <div className='font-accent tracking-[2px]'>
+                  SCORE
+                </div>
+                <div className='text-[30px] font-tertiary text-gradient mb-2'>
+                  <CountUp start={0} end={8} duration={3} /> 
+                </div>
+              </div>
+
+              {/* overall rating */}
+              <div className='flex'>
+                <div className='text-[30px] font-tertiary text-gradient mb-2'>
+                  Overwhelming Positive
+                </div>
+              </div>
+
+              {/* Total Reviews */}
+              <div className='flex py-10'>
+                <div className='font-accent tracking-[2px]'>
+                  Total Reviews
+                </div>
+                <div className='text-[30px] font-tertiary text-gradient mb-2'>
+                  <CountUp start={0} end={13456} duration={3} /> 
+                </div>
+              </div>
+
+            </div>
             <h2 className='h2'>Add To Cart</h2>
             <div>
               <button onClick={() => addToCart(productId)} className='flex-1 btn mx-10 my-10 w-40'>Price: ${price}</button>

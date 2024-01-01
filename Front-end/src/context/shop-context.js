@@ -14,10 +14,16 @@ const getDefaultCart = () => {
 export const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
   const [productList, setProductList] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]);
 
   useEffect(() => {
-    requestApi('/products', 'GET', []).then(response => {
-      setProductList(response.data.data)
+    const promiseProduct = requestApi('/products', 'GET', [])
+    const promiseUser = requestApi('/users/current-user', 'GET')
+    Promise.all([promiseUser, promiseProduct]).then(response => {
+      console.log('res=>', response)
+      setProductList(response[1].data.data)
+      setCurrentUser(response[0].data)
+      
     }).catch(err => {
       console.log(err)
     })
@@ -60,7 +66,7 @@ export const ShopContextProvider = (props) => {
     setCartItems(getDefaultCart());
   };
 
-  const contextValue = { cartItems, productList, getTotalCartAmount, getTotalCartItems, addToCart, removeFromCart, updateCartItemCount, checkout }
+  const contextValue = { cartItems, productList, currentUser, getTotalCartAmount, getTotalCartItems, addToCart, removeFromCart, updateCartItemCount, checkout }
 
   return (
     <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>

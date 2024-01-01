@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../../variants';
 import { TypeAnimation } from 'react-type-animation';
+import ReactPlayer from 'react-player/youtube'
 
 
 const Info = (props) => {
@@ -22,8 +23,8 @@ const Info = (props) => {
             initial='hidden'
             whileInView={'show'}
             viewport={{ once: true}}
-            className='flex-1 bg-about bg-contain bg-no-repeat lg:h-[500px] mix-blend-lighten bg-center'>
-
+            className='flex-1 lg:h-[400px] mix-blend-lighten bg-center'>
+              <ReactPlayer url='https://www.youtube.com/watch?v=hiduzCMM1Zw&t=2s&ab_channel=IGN' />
           </motion.div>
 
           {/*text*/}

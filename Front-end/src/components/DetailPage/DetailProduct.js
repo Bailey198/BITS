@@ -37,10 +37,11 @@ const DetailProduct = () => {
       <Nav />
       <Info description={productData.description}/>
       <section className='section justify-center'>_______________________________</section>
-      <Reviews />
-      <section className='section justify-center'>_______________________________</section>
       <Shopping price={productData.price} productId={productData.id} />
-      <div className='h-[1500px]'></div>
+      <section className='section justify-center'>_______________________________</section>
+      <div className='h-[200px]'></div>
+      <Reviews productId={productData.id}/>
+      <div className='h-[800px]'></div>
     </div>
   );
 };

@@ -14,6 +14,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { User } from './user/entities/user.entity';
 import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { OrderModule } from './order/order.module';
     CategoryModule,
     TypeOrmModule.forFeature([User]),
     ProductModule,
-    OrderModule
+    OrderModule,
+    CommentModule
   ],
   controllers: [AppController],
   providers: [AppService,

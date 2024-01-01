@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
-import itemImg from "../../assets/game2.png"
 
 export const CartItem = (props) => {
-  const { id, title, price } = props.data;
+  const { id, title, price, banner_img } = props.data;
   const { cartItems, addToCart, removeFromCart, updateCartItemCount } =
-    useContext(ShopContext);
+  useContext(ShopContext);
+
+  const productImg = process.env.REACT_APP_API_URL+'/'+ banner_img;
 
   return (
     <div className="flex justify-between cartItem">
 
-      <img className="mx-10 rounded" src={itemImg} />
+      <img className="mx-10 rounded" src={productImg} />
 
 
       <div className="description flex justify-between">
