@@ -17,7 +17,7 @@ const FormLogin = () => {
                 {isLogin? 
                     <Login/>
                     :
-                    <Register />
+                    <Register setForm={setForm} setIsLogin={setIsLogin}/>
                 }
 
                 {/* Register */}

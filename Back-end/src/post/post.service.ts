@@ -7,7 +7,6 @@ import { User } from 'src/user/entities/user.entity';
 import { FilterPostDto } from './dto/filter-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
-
 @Injectable()
 export class PostService {
     constructor(
@@ -36,32 +35,13 @@ export class PostService {
 
         const skip = (page - 1) * items_per_page;
         const [res,total] = await this.postRepository.findAndCount({
-            where: [
-                {
-                    title: Like('%'+ search +'%'),
-                    category: {
-                        id:category
-                    }
-            },
-                {
-                    description: Like('%'+ search +'%'),
-                    category: {
-                        id:category
-                    }
-                }
-            ],
             order: {created_at:'DESC'},
             take: items_per_page,
             skip:skip,
             relations:{
                 user:true,
-                category:true
             },
             select:{
-                category:{
-                    id:true,
-                    name:true
-                },
                 user:{
                     id:true,
                     firstName:true,
@@ -89,12 +69,8 @@ export class PostService {
     async findDetail(id:number):Promise<Post>{
         return await this.postRepository.findOne({
             where: {id},
-            relations: ['user', 'category'],
+            relations: ['user'],
             select: {
-                category: {
-                    id:true,
-                    name:true
-                },
                 user: {
                     id:true,
                     firstName:true,

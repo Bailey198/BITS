@@ -18,11 +18,13 @@ export class ProductService {
         const [res, total] = await this.productRepository.findAndCount({
             where:[
                 {title:Like('%' + keyword + '%')},
+                {description:Like('%' + keyword + '%')},
+                {category:Like('%' + keyword + '%')}
             ],
             order: {created_at: "DESC"},
             take: itemsPerPage,
             skip: skip,
-            select:['id', 'title', 'description', 'price', 'banner_img' , 'sale_numbers', 'active_players' , 'created_at', 'updated_at']
+            select:['id', 'title', 'description', 'category', 'video' ,'price', 'banner_img' , 'sale_numbers', 'active_players' , 'created_at', 'updated_at']
         })
         const lastPage = Math.ceil(total/itemsPerPage)
         const nextPage = page + 1 > lastPage ? null : page + 1;

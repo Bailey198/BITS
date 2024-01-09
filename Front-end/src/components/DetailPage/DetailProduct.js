@@ -35,7 +35,7 @@ const DetailProduct = () => {
       <Banner title={productData.title} bannerImg={productData.banner_img}/>
       <section className='section justify-center'>_______________________________</section>
       <Nav />
-      <Info description={productData.description}/>
+      <Info description={productData.description} videoLink={productData.video}/>
       <section className='section justify-center'>_______________________________</section>
       <Shopping price={productData.price} productId={productData.id} />
       <section className='section justify-center'>_______________________________</section>

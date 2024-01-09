@@ -8,10 +8,11 @@ import ReactPlayer from 'react-player/youtube'
 
 
 const Info = (props) => {
-  const {description} = props;
+  const {description, videoLink} = props;
   const [ref, inView] = useInView({
     threshold: 0.5,
   })
+  let videoDemo = videoLink || 'https://www.youtube.com/watch?v=XIMLoLxmTDw&ab_channel=CandRfun'
 
   return (
     <div className='section' id='info' ref={ref}>
@@ -24,7 +25,7 @@ const Info = (props) => {
             whileInView={'show'}
             viewport={{ once: true}}
             className='flex-1 lg:h-[400px] mix-blend-lighten bg-center'>
-              <ReactPlayer url='https://www.youtube.com/watch?v=hiduzCMM1Zw&t=2s&ab_channel=IGN' />
+              <ReactPlayer url={videoDemo} />
           </motion.div>
 
           {/*text*/}

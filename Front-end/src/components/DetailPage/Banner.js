@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import Image1 from '../../assets/wibuImpact.png';
-import Image2 from '../../assets/game2.png';
-import Image3 from '../../assets/game3.jpg';
-import Image4 from '../../assets/game4.png';
 import { TypeAnimation } from 'react-type-animation';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../../variants';
@@ -10,30 +6,16 @@ import { fadeIn } from '../../variants';
 const Banner = (props) => {
   const {title, bannerImg} = props;
   const mainImg = process.env.REACT_APP_API_URL+'/'+ bannerImg;
-  const [images, setImages] = useState({
-    img1: Image1,
-    img2: Image2,
-    img3: Image3,
-    img4: Image4
-  });
-
-  const [activeImg, setActiveImage] = useState(images.img1)
 
   return (
     <section className='section pb-0' id='home'>
       <div className='container mx-auto'>
-        <div className='relative '>
+        <div className='relative'>
           {/* image */}
-          <div className='flex flex-col justify-between relative'>
+          <div className='flex justify-center relative'>
             <motion.div>
               <img className='object-cover rounded-xl' src={mainImg} alt='' />
             </motion.div>
-            {/* <div className='flex flex-row absolute bottom-5 right-0 justify-end h-12 lg:h-24 pt-5'>
-              <img src={mainImg} alt="" className='w-12 h-12 lg:w-24 lg:h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(mainImg)} />
-              <img src={images.img2} alt="" className='w-12 h-12 lg:w-24 lg:h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img2)} />
-              <img src={images.img3} alt="" className='w-12 h-12 lg:w-24 lg:h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img3)} />
-              <img src={images.img4} alt="" className='w-12 h-12 lg:w-24 lg:h-20 rounded-md cursor-pointer' onClick={() => setActiveImage(images.img4)} />
-            </div> */}
           </div>
           {/* text */}
           <div className="flex-1 absolute top-0 px-5 py-5 bg-gray-500/50 w-full ">

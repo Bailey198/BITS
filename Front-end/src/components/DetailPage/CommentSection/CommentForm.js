@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 export const CommentForm = ({submitLabel, handleSubmit, 
     hasCancelButton = false,
     handleCancel,
-    initialText = "Write your comment here...",}) => {
+    initialText = "",}) => {
     const [text, setText] = useState(initialText);
     const isDisable = text.length === 0;
 

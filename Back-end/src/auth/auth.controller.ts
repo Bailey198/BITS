@@ -13,7 +13,6 @@ export class AuthController {
     constructor(private authService: AuthService){}
 
     @Post('register')
-    //@SetMetadata('isPublic', true)
     @Public()
     register(@Body() registerUserDto:RegisterUserDto): Promise<User> {
         console.log('register api');

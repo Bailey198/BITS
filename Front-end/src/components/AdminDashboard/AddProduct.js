@@ -5,8 +5,6 @@ import { useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
 import requestApi from '../../helpers/api';
 import { toast } from 'react-toastify';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 export const AddProduct = () => {
     const { register, setValue, handleSubmit, trigger, formState: { errors } } = useForm();
@@ -14,6 +12,7 @@ export const AddProduct = () => {
     const navigate = useNavigate();
 
     const [uploadImg, setUploadImg] = useState('');
+    const [btnDisable, setBtnDisable] = useState(false);
 
     const onImageChange = (event) => {
         if (event.target.files && event.target.files[0]) {
@@ -37,6 +36,7 @@ export const AddProduct = () => {
             }
         }
         dispatch(actions.controlLoading(true))
+        setBtnDisable(true);
         try {
             const res = await requestApi('/products', 'POST', formData, 'json', 'multipart/form-data');
             console.log('res=>', res)
@@ -45,11 +45,13 @@ export const AddProduct = () => {
 
             setTimeout(() => {
                 navigate('/Admin/products')
-            }, 3000);
+                setBtnDisable(false)
+            }, 2000);
 
         } catch (error) {
             console.log('error =>', error)
             dispatch(actions.controlLoading(false))
+            setBtnDisable(false)
         }
     }
 
@@ -114,6 +116,16 @@ export const AddProduct = () => {
                             </div>
 
                             <div className='mb-4'>
+                                <input
+                                    {...register('category', { required: 'Category is required!' })}
+                                    type="text"
+                                    className="block border border-grey-light w-full p-3 rounded"
+                                    placeholder="Category" />
+                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">Example: MMO, RPG, Horror...</p>
+                                {errors.category && <p className='text-red-500'>{errors.category.message}</p>}
+                            </div>
+
+                            <div className='mb-4'>
                                 <label><b>Description:</b></label>
                                 <textarea rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                  {...register('description', {required:"Description is required"})}/>
@@ -122,16 +134,29 @@ export const AddProduct = () => {
                             </div>
 
                             <div className='mb-4'>
+                                <input
+                                    {...register('video', { required: 'Video link is required!' })}
+                                    type="text"
+                                    className="block border border-grey-light w-full p-3 rounded"
+                                    placeholder="Video Link" />
+                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">Use Youtube video link.</p>
+                                {errors.video && <p className='text-red-500'>{errors.video.message}</p>}
+                            </div>
+        
+                            <div className='mb-4'>
                                 {uploadImg && <img src={uploadImg} className='max-w-xs rounded border bg-white p-1 dark:border-neutral-700 dark:bg-neutral-800' />
                                 }
                                 <label for="file_input"><b>Upload file</b></label>
                                 <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                     aria-describedby="file_input_help" id="file_input" type="file" name='banner_img' {...register('banner_img', { required: 'Image is required!', onChange: onImageChange})} />
                                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG.</p>
+                                {errors.banner_img && <p className='text-red-500'>{errors.banner_img.message}</p>}
+
                             </div>
 
                             <button
                                 type='button'
+                                disabled={btnDisable}
                                 className="btn p-3 text-center w-full"
                                 onClick={handleSubmit(handleSubmitFormAdd)}
                             >

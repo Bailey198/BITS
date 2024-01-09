@@ -91,9 +91,9 @@ const Shopping = (props) => {
               </div>
 
             </div>
-            <h2 className='h2'>Add To Cart</h2>
+            <h2 className='h2'>Price: ${price}</h2>
             <div>
-              <button onClick={() => addToCart(productId)} className='flex-1 btn mx-10 my-10 w-40'>Price: ${price}</button>
+              <button onClick={() => addToCart(productId)} className='flex-1 btn  w-40'>Add To Cart</button>
             </div>
           </div>
         </motion.div>

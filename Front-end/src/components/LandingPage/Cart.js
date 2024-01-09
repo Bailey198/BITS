@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState,useContext } from 'react'
 import { ShopContext } from '../../context/shop-context';
 import { CartItem } from './CartItem';
 import { useNavigate } from "react-router-dom";
@@ -13,12 +13,14 @@ export const Cart = () => {
     const totalAmount = getTotalCartAmount();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [btnDisable, setBtnDisable] = useState(false);
 
     const orderData = {orderTotal: totalAmount, address:'Hong Linh Plaza', status: 1}
 
     const handleSubmitOrder = async (data) => {
         
         dispatch(actions.controlLoading(true))
+        setBtnDisable(true)
         try {
             const res = await requestApi('/orders', 'POST', data);
             console.log('res=>', res)
@@ -28,6 +30,7 @@ export const Cart = () => {
             setTimeout(() => {
                 navigate('/')
                 checkout();
+                setBtnDisable(false)
             }, 2000);
     
         } catch (error) {
@@ -55,6 +58,7 @@ export const Cart = () => {
                     <p className='h2'> Subtotal : ${totalAmount} </p>
                     <button  onClick={() => navigate("/")}> Continue Shopping </button>
                     <button
+                        disabled={btnDisable}
                         onClick={() => {
                             handleSubmitOrder(orderData);
                         }}

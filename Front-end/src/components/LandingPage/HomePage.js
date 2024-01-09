@@ -7,10 +7,9 @@ const HomePage = () => {
   return (
     <div>
       <Banner />
-      <section className='section justify-center'>_______________________________</section>
-      <GameList />
-      <Nav />
-      <div className='h-[1500px]'></div>
+      <div className='h-[300px]'><center></center></div>
+      <GameList/>
+      <div className='h-[1000px]'></div>
     </div>
   )
 }

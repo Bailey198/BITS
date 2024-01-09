@@ -28,19 +28,19 @@ const Nav = () => {
               className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
               <GrInfo />
             </Link>
-            <Link to='reviews'
-              activeClass='active'
-              smooth={true}
-              spy={true}
-              className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
-              <BsChatSquareText />
-            </Link>
             <Link to='shopping'
               activeClass='active'
               smooth={true}
               spy={true}
               className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
               <MdOutlineShoppingCart />
+            </Link>
+            <Link to='reviews'
+              activeClass='active'
+              smooth={true}
+              spy={true}
+              className='cursor-pointer w-[60px] h-[60px] flex items-center justify-center'>
+              <BsChatSquareText />
             </Link>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Post } from "src/post/entities/post.entity";
+import { Product } from "src/product/entities/product.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
@@ -21,8 +21,4 @@ export class Category {
 
     @UpdateDateColumn()
     updated_at:Date;
-
-    @OneToMany(() => Post, (post) => post.category)
-    posts:Post[]
-
 }

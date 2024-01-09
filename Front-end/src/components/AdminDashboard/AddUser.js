@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -11,9 +11,12 @@ export const AddUser = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [btnDisable, setBtnDisable] = useState(false);
+
     const handleSubmitFormAdd = async (data) => {
         console.log('data form', data);
         dispatch(actions.controlLoading(true))
+        setBtnDisable(true)
         try {
             const res = await requestApi('/users', 'POST', data);
             console.log('res=>', res)
@@ -22,7 +25,8 @@ export const AddUser = () => {
 
             setTimeout(() => {
                 navigate('/Admin/customers')
-            }, 3000);
+                setBtnDisable(false)
+            }, 2000);
 
         } catch (error) {
             console.log('error =>', error)
@@ -126,6 +130,7 @@ export const AddUser = () => {
                             placeholder="Confirm Password" /> */}
 
                             <button
+                                disabled={btnDisable}
                                 type='button'
                                 className="btn p-3 text-center w-full"
                                 onClick={handleSubmit(handleSubmitFormAdd)}

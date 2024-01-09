@@ -32,6 +32,4 @@ export class Post {
     })
     user:User;
 
-    @ManyToOne(() => Category, (category) => category.posts)
-    category:Category;
 }

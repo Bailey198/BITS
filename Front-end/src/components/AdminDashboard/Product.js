@@ -12,7 +12,7 @@ const Product = () => {
     const [numOfPage, setNumOfPage] = useState(1);
     const [totalProduct, setTotalProduct] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(3);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
     const [searchString, setSearchString] = useState("");
     const [selectedRows, setSelectedRows] = useState([])
     const [deleteItem, setDeleteItem] = useState(null);

@@ -63,7 +63,7 @@ const DataTable = (props) => {
         for (let i = 1; i <= numOfPage; i++) {
             pagination.push(
                 <li key={i} >
-                    <button className={currentPage === i ? "bg-cyan-400 flex items-center justify-center px-3 h-8 leading-tight text-white-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" : "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"}
+                    <button className={currentPage === i ? "bg-cyan-400 font-bold flex items-center justify-center px-3 h-8 leading-tight text-red-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" : "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"}
                         onClick={() => onPageChange(i)}
                     >
                         {i}
