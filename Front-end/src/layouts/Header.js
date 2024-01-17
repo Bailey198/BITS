@@ -6,7 +6,7 @@ import Logo from '../../src/assets/logo.png';
 
 const Header = () => {
   const navigate = useNavigate();
-  const {getTotalCartItems} = useContext(ShopContext);
+  const {getTotalCartItems, currentUser} = useContext(ShopContext);
 
   const cartQuantity = getTotalCartItems();
 
@@ -17,13 +17,14 @@ const Header = () => {
   }
 
   return (
-    <div className='fixed top-2 ig:top-8 pt-4 pb-8 w-full overflow-hidden z-50'>
-      <div className='container mx-auto'>
+    <div className='fixed bg-white top-2 ig:top-8 pt-4 pb-8 w-full overflow-hidden z-50'>
+      <div className='container mx-auto '>
         <div className='flex justify-between items-center'>
           {/* logo */}
           <Link to='/'>
             <img className='w-40 rounded-lg' src={Logo} alt='' />
           </Link>
+          <p className='h2 text-accent'>Welcome {currentUser.firstName} {currentUser.lastName}</p>
           <div className='flex'>
             <Link to="/cart" className='bg-white rounded h-14 w-12'>
               <button className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out" aria-label="Cart">

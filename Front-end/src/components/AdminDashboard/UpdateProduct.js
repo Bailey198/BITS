@@ -23,7 +23,7 @@ export const UpdateProduct = () => {
                 const res = await requestApi(`/products/${params.id}`, 'GET', []) // requestApi(`/users/${params.id}`, 'GET', [])
                 console.log("res =>", res)
                
-                const fields = ['title', 'price', 'description', 'banner_img']
+                const fields = ['title', 'price', 'category', 'description', 'video', 'banner_img']
                 fields.forEach((field) => { setValue(field, res.data[field]) })
                 
                 setProductData({...res.data, banner_img: process.env.REACT_APP_API_URL+'/'+ res.data.banner_img})
@@ -127,7 +127,7 @@ export const UpdateProduct = () => {
                 <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                     <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                         <form>
-                            <h3 className="h3 text-accent text-center">Add New Product</h3>
+                            <h3 className="h3 text-accent text-center">Update Product</h3>
                             <div className='mb-4'>
                                 <input
                                     {...register('title', { required: 'Title is required!' })}
@@ -147,11 +147,31 @@ export const UpdateProduct = () => {
                             </div>
 
                             <div className='mb-4'>
+                                <input
+                                    {...register('category', { required: 'Category is required!' })}
+                                    type="text"
+                                    className="block border border-grey-light w-full p-3 rounded"
+                                    placeholder="Category" />
+                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">Example: MMO, RPG, Horror...</p>
+                                {errors.category && <p className='text-red-500'>{errors.category.message}</p>}
+                            </div>
+
+                            <div className='mb-4'>
                                 <label><b>Description:</b></label>
                                 <textarea rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                  {...register('description', {required:"Description is required"})}/>
                                 {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
 
+                            </div>
+
+                            <div className='mb-4'>
+                                <input
+                                    {...register('video', { required: 'Video link is required!' })}
+                                    type="text"
+                                    className="block border border-grey-light w-full p-3 rounded"
+                                    placeholder="Video Link" />
+                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">Use Youtube video link.</p>
+                                {errors.video && <p className='text-red-500'>{errors.video.message}</p>}
                             </div>
 
                             <div className='mb-4'>
